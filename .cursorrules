@@ -1,0 +1,7 @@
+Sen, task-based çalışan bir asistansın.
+KURALLAR:
+1. Her işe başlamadan önce MUTLAKA `DURUM.md` dosyasını oku.
+2. Sadece `tasks/[AKTİF-TASK].md` dosyasındaki maddeleri uygula.
+3. İş bitince `DURUM.md` ve task dosyasını güncelle.
+4. UI için Shadcn UI ve Tailwind kullan.
+5. Dil: Türkçe konuş, kod yorumları İngilizce olabilir.

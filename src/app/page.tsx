@@ -1,71 +1,7 @@
-"use client";
-
-import { useState, useEffect } from "react";
-import { Dialog, DialogPanel } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { LockClosedIcon, BoltIcon, CloudArrowDownIcon } from "@heroicons/react/24/outline";
-import { VideoDropzone } from "@/components/ui/dropzone";
-import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { useVideoProcessor } from "@/hooks/use-video-process";
 import FAQSection from "@/components/home/faq-section";
-import AdPlaceholder from "@/components/ui/ad-placeholder";
-
-const navigation = [
-  // Remove extra links, keep only GitHub if needed
-];
 
 export default function Home() {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const {
-    loadFFmpeg,
-    compressVideo,
-    loaded,
-    loading,
-    progress,
-    error,
-    isProcessing,
-    outputUrl,
-    reset,
-  } = useVideoProcessor();
-
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  // Automatically load FFmpeg when component mounts? We'll load on demand.
-  useEffect(() => {
-    // Optionally load FFmpeg early for better UX
-    // loadFFmpeg();
-  }, []);
-
-  const handleFileSelected = (file: File) => {
-    setSelectedFile(file);
-    reset(); // Clear previous results
-  };
-
-  const handleCompress = async () => {
-    if (!selectedFile) return;
-    if (!loaded) {
-      await loadFFmpeg();
-    }
-    try {
-      await compressVideo(selectedFile);
-    } catch (err) {
-      // error already set in hook
-      console.error(err);
-    }
-  };
-
-  const handleDownload = () => {
-    if (!outputUrl) return;
-    const a = document.createElement("a");
-    a.href = outputUrl;
-    a.download = selectedFile ? `compressed-${selectedFile.name}` : "compressed-video.mp4";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-  };
-
   // Feature data updated
   const features = [
     {
@@ -87,64 +23,8 @@ export default function Home() {
 
   return (
     <div className="bg-white dark:bg-gray-900">
-      {/* Header */}
-      <header className="absolute inset-x-0 top-0 z-50">
-        <nav aria-label="Global" className="flex items-center justify-between p-6 lg:px-8">
-          <div className="flex lg:flex-1">
-            <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">LocalCompress</span>
-              <img
-                alt=""
-                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-                className="h-8 w-auto dark:hidden"
-              />
-              <img
-                alt=""
-                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-                className="h-8 w-auto not-dark:hidden"
-              />
-            </a>
-          </div>
-        </nav>
-        <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
-          <div className="fixed inset-0 z-50" />
-          <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 dark:bg-gray-900 dark:sm:ring-gray-100/10">
-            <div className="flex items-center justify-between">
-              <a href="#" className="-m-1.5 p-1.5">
-                <span className="sr-only">LocalCompress</span>
-                <img
-                  alt=""
-                  src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
-                  className="h-8 w-auto dark:hidden"
-                />
-                <img
-                  alt=""
-                  src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-                  className="h-8 w-auto not-dark:hidden"
-                />
-              </a>
-              <button
-                type="button"
-                onClick={() => setMobileMenuOpen(false)}
-                className="-m-2.5 rounded-md p-2.5 text-gray-700 dark:text-gray-200"
-              >
-                <span className="sr-only">Close menu</span>
-                <XMarkIcon aria-hidden="true" className="size-6" />
-              </button>
-            </div>
-            <div className="mt-6 flow-root">
-              <div className="-my-6 divide-y divide-gray-500/10 dark:divide-white/10">
-                <div className="space-y-2 py-6">
-                  {/* No navigation items */}
-                </div>
-              </div>
-            </div>
-          </DialogPanel>
-        </Dialog>
-      </header>
-
       {/* Hero Section */}
-      <div className="relative isolate px-6 pt-14 lg:px-8">
+      <div className="relative isolate px-6 lg:px-8">
         <div
           aria-hidden="true"
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
@@ -160,89 +40,81 @@ export default function Home() {
         <div className="mx-auto max-w-2xl py-16 sm:py-20 lg:py-24">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
             <div className="relative rounded-full px-3 py-1 text-sm/6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20 dark:text-gray-400 dark:ring-white/10 dark:hover:ring-white/20">
-              The world's first 100% browser‑based video compressor{" "}
+              All‑in‑One Local Media Tools
             </div>
           </div>
           <div className="text-center">
             <h1 className="text-5xl font-semibold tracking-tight text-balance text-gray-900 sm:text-7xl dark:text-white">
-              Compress Videos Instantly, Without Losing Privacy
+              All‑in‑One Local Media Tools
             </h1>
             <p className="mt-8 text-lg font-medium text-pretty text-gray-500 sm:text-xl/8 dark:text-gray-400">
-              The world's first 100% browser‑based video compressor. Your files never leave your device.
+              Compress, convert, and transform videos entirely in your browser. Your files never leave your device.
             </p>
-            <div className="mt-10 flex items-center justify-center gap-x-6">
-              {/* Replace buttons with our Dropzone and AdPlaceholder */}
-              <div className="w-full max-w-lg">
-                {!selectedFile ? (
-                  <>
-                    <VideoDropzone
-                      onFileSelected={handleFileSelected}
-                      disabled={isProcessing}
-                    />
-                    <AdPlaceholder className="mt-6" />
-                  </>
-                ) : (
-                  <Card className="w-full">
-                    <CardHeader>
-                      <CardTitle>Compression Progress</CardTitle>
-                      <CardDescription>
-                        Your video is being processed locally in your browser.
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-6">
-                      <div className="flex items-center gap-4">
-                        <Button
-                          onClick={handleCompress}
-                          disabled={!selectedFile || isProcessing || (loading && !loaded)}
-                          className="min-w-32"
-                        >
-                          {isProcessing ? "Processing..." : loading ? "Loading FFmpeg..." : "Compress Video"}
-                        </Button>
-                        {loaded && !isProcessing && (
-                          <span className="text-green-600 font-semibold">✓ FFmpeg ready</span>
-                        )}
+            <div className="mt-10 flex items-center justify-center">
+              <div className="w-full max-w-4xl">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  {/* Video Compressor Card */}
+                  <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-50 to-white dark:from-gray-800 dark:to-gray-900 p-8 shadow-xl ring-1 ring-gray-200 dark:ring-gray-700 hover:shadow-2xl transition-shadow">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="p-3 bg-indigo-100 dark:bg-indigo-900 rounded-xl">
+                        <svg className="w-8 h-8 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+                        </svg>
                       </div>
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Video Compressor</h3>
+                    </div>
+                    <p className="text-gray-600 dark:text-gray-300 mb-6">
+                      Reduce video file size securely without uploading. Perfect for saving space or preparing videos for sharing.
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <a
+                        href="/compress-video"
+                        className="inline-flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-semibold hover:text-indigo-800 dark:hover:text-indigo-300"
+                      >
+                        Start Compressing
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                      </a>
+                      <span className="text-xs font-medium px-3 py-1 rounded-full bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300">
+                        No uploads
+                      </span>
+                    </div>
+                  </div>
 
-                      {/* Progress Bar */}
-                      {(isProcessing || loading) && (
-                        <div className="space-y-2">
-                          <div className="flex justify-between text-sm">
-                            <span>Progress</span>
-                            <span>{progress}%</span>
-                          </div>
-                          <Progress value={progress} />
-                        </div>
-                      )}
-
-                      {/* Error Alert */}
-                      {error && (
-                        <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
-                          <p className="font-semibold">Error</p>
-                          <p className="text-sm">{error}</p>
-                        </div>
-                      )}
-
-                      {/* Download Section */}
-                      {outputUrl && (
-                        <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
-                          <p className="font-semibold text-green-800">Compression successful!</p>
-                          <p className="text-sm text-green-700 mb-4">
-                            Your video has been compressed and is ready to download.
-                          </p>
-                          <div className="flex gap-4">
-                            <Button onClick={handleDownload} className="bg-green-600 hover:bg-green-700">
-                              Download Video
-                            </Button>
-                            <Button variant="outline" onClick={reset}>
-                              Process Another
-                            </Button>
-                          </div>
-                          <AdPlaceholder className="mt-4" />
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                )}
+                  {/* Video Converter Card */}
+                  <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-50 to-white dark:from-gray-800 dark:to-gray-900 p-8 shadow-xl ring-1 ring-gray-200 dark:ring-gray-700 hover:shadow-2xl transition-shadow">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="p-3 bg-emerald-100 dark:bg-emerald-900 rounded-xl">
+                        <svg className="w-8 h-8 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                      </div>
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Video Converter</h3>
+                    </div>
+                    <p className="text-gray-600 dark:text-gray-300 mb-6">
+                      Convert videos to MP4, MOV, MKV, AVI, MP3, or GIF—all locally. Extract audio or create animated GIFs in seconds.
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <a
+                        href="/convert-video"
+                        className="inline-flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-semibold hover:text-emerald-800 dark:hover:text-emerald-300"
+                      >
+                        Start Converting
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                      </a>
+                      <span className="text-xs font-medium px-3 py-1 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300">
+                        6 formats
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <p className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
+                  Both tools run 100% in your browser using WebAssembly. No data is sent to any server.
+                </p>
               </div>
             </div>
           </div>
@@ -267,10 +139,10 @@ export default function Home() {
           <div className="mx-auto max-w-2xl lg:text-center">
             <h2 className="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">Why Choose Us</h2>
             <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl lg:text-balance dark:text-white">
-              Everything you need to compress videos securely
+              Everything you need to process videos securely
             </p>
             <p className="mt-6 text-lg/8 text-gray-700 dark:text-gray-300">
-              Our technology ensures your videos stay private while delivering fast, high‑quality compression—all in your browser.
+              Our technology ensures your videos stay private while delivering fast, high‑quality compression and conversion—all in your browser.
             </p>
           </div>
           <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">

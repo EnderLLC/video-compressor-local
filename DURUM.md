@@ -1,7 +1,7 @@
 # DURUM - Proje Dashboard
-**Aktif Task:** TASK-06 - Monetization
+**Aktif Task:** TASK-07 - Architecture Refactor & Video Converter Module
 **Durum:** 🟡 Devam Ediyor
-**Faz:** 2 - Monetization
+**Faz:** 3 - Multi‑Tool Expansion
 
 ## Son Oturum Özetleri
 - **TASK-01** tamamlandı. Kurulum başarıyla yapıldı, FFmpeg.wasm entegre edildi.
@@ -9,6 +9,7 @@
 - **TASK-03** tamamlandı. Metadata, FAQ accordion ve reklam placeholder'ları eklendi.
 - **TASK-04** tamamlandı. Production build hazırlandı ve deployment için Vercel kuruldu.
 - **TASK-05** tamamlandı. UI tasarımı güncellendi, responsive iyileştirmeler yapıldı, logo eklendi.
+- **TASK-06** tamamlandı. Monetization altyapısı kuruldu, reklam placeholder'ları ve affiliate bağlantıları eklendi.
 
 ## İlerleme
 - [x] **A.1 Temizlik ve UI Kurulumu** – Shadcn UI init, bileşenler eklendi, page.tsx temizlendi.

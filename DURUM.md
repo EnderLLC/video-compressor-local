@@ -1,13 +1,14 @@
 # DURUM - Proje Dashboard
-**Aktif Task:** TASK-05 - Design Overhaul
+**Aktif Task:** TASK-06 - Monetization
 **Durum:** 🟡 Devam Ediyor
-**Faz:** 1 - Temel Kurulum
+**Faz:** 2 - Monetization
 
 ## Son Oturum Özetleri
 - **TASK-01** tamamlandı. Kurulum başarıyla yapıldı, FFmpeg.wasm entegre edildi.
 - **TASK-02** tamamlandı. Dropzone bileşeni, FFmpeg hook ve ana sayfa entegrasyonu başarıyla uygulandı, auto-load özelliği eklendi.
 - **TASK-03** tamamlandı. Metadata, FAQ accordion ve reklam placeholder'ları eklendi.
 - **TASK-04** tamamlandı. Production build hazırlandı ve deployment için Vercel kuruldu.
+- **TASK-05** tamamlandı. UI tasarımı güncellendi, responsive iyileştirmeler yapıldı, logo eklendi.
 
 ## İlerleme
 - [x] **A.1 Temizlik ve UI Kurulumu** – Shadcn UI init, bileşenler eklendi, page.tsx temizlendi.

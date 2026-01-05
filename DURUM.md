@@ -1,12 +1,13 @@
 # DURUM - Proje Dashboard
-**Aktif Task:** TASK-04 - Production Build & Deployment Prep
-**Durum:** 🟢 Tamamlandı
+**Aktif Task:** TASK-05 - Design Overhaul
+**Durum:** 🟡 Devam Ediyor
 **Faz:** 1 - Temel Kurulum
 
 ## Son Oturum Özetleri
 - **TASK-01** tamamlandı. Kurulum başarıyla yapıldı, FFmpeg.wasm entegre edildi.
 - **TASK-02** tamamlandı. Dropzone bileşeni, FFmpeg hook ve ana sayfa entegrasyonu başarıyla uygulandı, auto-load özelliği eklendi.
 - **TASK-03** tamamlandı. Metadata, FAQ accordion ve reklam placeholder'ları eklendi.
+- **TASK-04** tamamlandı. Production build hazırlandı ve deployment için Vercel kuruldu.
 
 ## İlerleme
 - [x] **A.1 Temizlik ve UI Kurulumu** – Shadcn UI init, bileşenler eklendi, page.tsx temizlendi.

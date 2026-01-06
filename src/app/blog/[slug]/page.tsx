@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { ArrowRightIcon, CalendarDaysIcon, DocumentTextIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import AdUnit from "@/components/ads/ad-unit";
+import { AD_SLOTS } from "@/config/ads";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -193,7 +194,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                 </div>
               )}
 
-              <AdUnit slotId="blog-sidebar" format="vertical" label="Advertisement" />
+              <AdUnit slotId={AD_SLOTS.sidebar} format="vertical" label="Advertisement" />
 
               {/* Additional resources */}
               <div className="rounded-2xl bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 p-8 shadow-xl ring-1 ring-gray-200 dark:ring-gray-700">

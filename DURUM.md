@@ -1,7 +1,7 @@
 # DURUM - Proje Dashboard
-**Aktif Task:** TASK-20 - Final Polish & AdSense Injection
-**Durum:** 🟢 Final
-**Faz:** FINAL
+**Aktif Task:** TASK-21 - Manual Ad Units Implementation
+**Durum:** 🟢 In Progress
+**Faz:** IMPLEMENTATION
 
 ## Son Oturum Özetleri
 - **TASK-01** tamamlandı. Kurulum başarıyla yapıldı, FFmpeg.wasm entegre edildi.

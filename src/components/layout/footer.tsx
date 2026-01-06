@@ -39,6 +39,14 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href="/crop-video"
+                  className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                >
+                  Video Cropper
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/remove-audio"
                   className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                 >

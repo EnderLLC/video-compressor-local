@@ -141,6 +141,34 @@ export default function Home() {
                       </span>
                     </div>
                   </div>
+                  {/* Video Cropper Card */}
+                  <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-50 to-white dark:from-gray-800 dark:to-gray-900 p-8 shadow-xl ring-1 ring-gray-200 dark:ring-gray-700 hover:shadow-2xl transition-shadow">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="p-3 bg-purple-100 dark:bg-purple-900 rounded-xl">
+                        <svg className="w-8 h-8 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 6l12 12M6 18L18 6M6 6h12v12" />
+                        </svg>
+                      </div>
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Video Cropper</h3>
+                    </div>
+                    <p className="text-gray-600 dark:text-gray-300 mb-6">
+                      Crop videos to any aspect ratio (1:1, 9:16, 16:9) visually. Select the region you want to keep and export.
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <a
+                        href="/crop-video"
+                        className="inline-flex items-center gap-2 text-purple-600 dark:text-purple-400 font-semibold hover:text-purple-800 dark:hover:text-purple-300"
+                      >
+                        Start Cropping
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                      </a>
+                      <span className="text-xs font-medium px-3 py-1 rounded-full bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-300">
+                        Visual crop
+                      </span>
+                    </div>
+                  </div>
                   {/* Remove Audio Card */}
                   <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-rose-50 to-white dark:from-gray-800 dark:to-gray-900 p-8 shadow-xl ring-1 ring-gray-200 dark:ring-gray-700 hover:shadow-2xl transition-shadow">
                     <div className="flex items-center gap-4 mb-6">

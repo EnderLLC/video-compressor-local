@@ -69,6 +69,14 @@ export default function Footer() {
                   Volume Booster
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/blog"
+                  className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                >
+                  Blog
+                </Link>
+              </li>
               {TOP_CONVERSIONS.map(({ from, to }) => {
                 const slug = `${from}-to-${to}`;
                 const href = `/tools/${slug}`;

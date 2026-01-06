@@ -1,7 +1,7 @@
 # DURUM - Proje Dashboard
-**Aktif Task:** TASK-14 - Rotate & Flip Tools
+**Aktif Task:** TASK-16 - SEO Blog Infrastructure
 **Durum:** 🟡 Devam Ediyor
-**Faz:** 3 - Multi‑Tool Expansion
+**Faz:** Growth & SEO
 
 ## Son Oturum Özetleri
 - **TASK-01** tamamlandı. Kurulum başarıyla yapıldı, FFmpeg.wasm entegre edildi.
@@ -14,6 +14,8 @@
 - **TASK-11** tamamlandı. Video trimmer modülü başarıyla çalışıyor, kesme işlemleri hızlı ve hatasız çalışıyor.
 - **TASK-12** tamamlandı. Audio Manager Pack (Mute & Boost) başarıyla çalışıyor, ses kaldırma ve yükseltme işlemleri hatasız çalışıyor.
 - **TASK-13** tamamlandı. Video cropper modülü başarıyla çalışıyor, kırpma işlemleri yapılabiliyor.
+- **TASK-14** tamamlandı. Video rotate & flip modülü başarıyla çalışıyor, döndürme ve çevirme işlemleri hatasız çalışıyor.
+- **TASK-15** tamamlandı. Google Search Console sitemap gönderildi, 151 sayfa keşfedildi.
 
 ## İlerleme
 - [x] **A.1 Temizlik ve UI Kurulumu** – Shadcn UI init, bileşenler eklendi, page.tsx temizlendi.

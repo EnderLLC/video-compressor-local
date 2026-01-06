@@ -13,6 +13,30 @@ export default function Footer() {
           <div>
             <h3 className="text-sm/6 font-semibold text-gray-900 dark:text-white">Quick Links</h3>
             <ul role="list" className="mt-6 space-y-4">
+              <li>
+                <Link
+                  href="/compress-video"
+                  className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                >
+                  Video Compressor
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/convert-video"
+                  className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                >
+                  Video Converter
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/trim-video"
+                  className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                >
+                  Video Trimmer
+                </Link>
+              </li>
               {TOP_CONVERSIONS.map(({ from, to }) => {
                 const slug = `${from}-to-${to}`;
                 const href = `/tools/${slug}`;

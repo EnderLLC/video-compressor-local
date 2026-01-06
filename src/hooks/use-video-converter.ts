@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useRef } from "react";
 
-type Format = "mp4" | "mov" | "mkv" | "avi" | "mp3" | "gif";
+type Format = "mp4" | "mov" | "mkv" | "avi" | "webm" | "wmv" | "flv" | "ogv" | "3gp" | "mp3" | "wav" | "ogg" | "m4a" | "wma" | "gif";
 
 export function useVideoConverter() {
   const ffmpegRef = useRef<any>(null);
@@ -70,8 +70,26 @@ export function useVideoConverter() {
         return ["-c:v", "libx264", "-c:a", "aac"];
       case "avi":
         return ["-c:v", "libx264", "-c:a", "mp3"];
+      case "webm":
+        return ["-c:v", "libvpx-vp9", "-c:a", "libopus"];
+      case "wmv":
+        return ["-c:v", "wmv2", "-c:a", "wmav2"];
+      case "flv":
+        return ["-c:v", "flv", "-c:a", "mp3"];
+      case "ogv":
+        return ["-c:v", "libtheora", "-c:a", "libvorbis"];
+      case "3gp":
+        return ["-c:v", "mpeg4", "-c:a", "aac"];
       case "mp3":
         return ["-vn", "-acodec", "libmp3lame"];
+      case "wav":
+        return ["-vn", "-acodec", "pcm_s16le"];
+      case "ogg":
+        return ["-vn", "-acodec", "libvorbis"];
+      case "m4a":
+        return ["-vn", "-acodec", "aac"];
+      case "wma":
+        return ["-vn", "-acodec", "wmav2"];
       case "gif":
         return ["-vf", "fps=10,scale=320:-1:flags=lanczos", "-c:v", "gif"];
       default:
@@ -89,7 +107,16 @@ export function useVideoConverter() {
       case "mov": return "video/quicktime";
       case "mkv": return "video/x-matroska";
       case "avi": return "video/x-msvideo";
+      case "webm": return "video/webm";
+      case "wmv": return "video/x-ms-wmv";
+      case "flv": return "video/x-flv";
+      case "ogv": return "video/ogg";
+      case "3gp": return "video/3gpp";
       case "mp3": return "audio/mpeg";
+      case "wav": return "audio/wav";
+      case "ogg": return "audio/ogg";
+      case "m4a": return "audio/mp4";
+      case "wma": return "audio/x-ms-wma";
       case "gif": return "image/gif";
       default: return "video/mp4";
     }

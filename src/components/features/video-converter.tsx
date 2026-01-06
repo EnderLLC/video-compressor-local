@@ -13,7 +13,16 @@ const FORMATS = [
   { value: "mov", label: "MOV (QuickTime)", mime: "video/quicktime" },
   { value: "mkv", label: "MKV (Matroska)", mime: "video/x-matroska" },
   { value: "avi", label: "AVI (Legacy)", mime: "video/x-msvideo" },
+  { value: "webm", label: "WebM (VP9)", mime: "video/webm" },
+  { value: "wmv", label: "WMV (Windows Media)", mime: "video/x-ms-wmv" },
+  { value: "flv", label: "FLV (Flash Video)", mime: "video/x-flv" },
+  { value: "ogv", label: "OGV (Ogg Video)", mime: "video/ogg" },
+  { value: "3gp", label: "3GP (Mobile)", mime: "video/3gpp" },
   { value: "mp3", label: "MP3 (Audio Only)", mime: "audio/mpeg" },
+  { value: "wav", label: "WAV (Uncompressed)", mime: "audio/wav" },
+  { value: "ogg", label: "OGG (Vorbis)", mime: "audio/ogg" },
+  { value: "m4a", label: "M4A (AAC Audio)", mime: "audio/mp4" },
+  { value: "wma", label: "WMA (Windows Media Audio)", mime: "audio/x-ms-wma" },
   { value: "gif", label: "GIF (Animated)", mime: "image/gif" },
 ] as const;
 

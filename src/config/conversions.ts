@@ -1,19 +1,20 @@
 // Supported video/audio formats for conversion
-export const SUPPORTED_FORMATS = ['mp4', 'mov', 'avi', 'mkv', 'mp3', 'gif'] as const;
+export const SUPPORTED_FORMATS = ['mp4', 'mov', 'avi', 'mkv', 'webm', 'wmv', 'flv', 'ogv', '3gp', 'mp3', 'wav', 'ogg', 'm4a', 'wma', 'gif'] as const;
 
 export type Format = typeof SUPPORTED_FORMATS[number];
 
 // Define which conversions are valid (excluding nonsensical ones)
 // Rules:
-// - mp3 is audio only, can be extracted from any video format
+// - mp3, wav, ogg, m4a, wma are audio only, can be extracted from any video format
 // - gif is animated image, can be created from any video format
 // - Video-to-video conversions are allowed between all video formats
+// - Audio-to-audio conversions allowed between different audio formats
 // - Audio-to-video conversions are excluded (mp3 -> mp4, etc.)
 // - Same format conversions are excluded (already same)
 export const VALID_CONVERSIONS: { from: Format; to: Format }[] = (() => {
   const conversions: { from: Format; to: Format }[] = [];
-  const videoFormats: Format[] = ['mp4', 'mov', 'avi', 'mkv'];
-  const audioFormats: Format[] = ['mp3'];
+  const videoFormats: Format[] = ['mp4', 'mov', 'avi', 'mkv', 'webm', 'wmv', 'flv', 'ogv', '3gp'];
+  const audioFormats: Format[] = ['mp3', 'wav', 'ogg', 'm4a', 'wma'];
   const imageFormats: Format[] = ['gif'];
 
   // Video to video
@@ -39,8 +40,16 @@ export const VALID_CONVERSIONS: { from: Format; to: Format }[] = (() => {
     }
   }
 
-  // Audio to audio? Only mp3, no other audio formats, so skip.
-  // Audio to video? Exclude (mp3 -> mp4 not meaningful)
+  // Audio to audio (convert between audio formats)
+  for (const from of audioFormats) {
+    for (const to of audioFormats) {
+      if (from !== to) {
+        conversions.push({ from, to });
+      }
+    }
+  }
+
+  // Audio to video? Exclude (not meaningful)
   // Audio to gif? Exclude.
   // Gif to anything? Exclude (gif is output only)
   // (If you want gif -> mp4 later, you can add)

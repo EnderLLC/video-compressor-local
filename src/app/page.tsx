@@ -1,7 +1,6 @@
 import { LockClosedIcon, BoltIcon, CloudArrowDownIcon } from "@heroicons/react/24/outline";
 import FAQSection from "@/components/home/faq-section";
 import PopularConversions from "@/components/seo/popular-conversions";
-import Footer from "@/components/layout/footer";
 
 export default function Home() {
   // Feature data updated
@@ -54,7 +53,7 @@ export default function Home() {
             </p>
             <div className="mt-10 flex items-center justify-center">
               <div className="w-full max-w-4xl">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {/* Video Compressor Card */}
                   <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-50 to-white dark:from-gray-800 dark:to-gray-900 p-8 shadow-xl ring-1 ring-gray-200 dark:ring-gray-700 hover:shadow-2xl transition-shadow">
                     <div className="flex items-center gap-4 mb-6">
@@ -113,9 +112,38 @@ export default function Home() {
                       </span>
                     </div>
                   </div>
+
+                  {/* Video Trimmer Card */}
+                  <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-amber-50 to-white dark:from-gray-800 dark:to-gray-900 p-8 shadow-xl ring-1 ring-gray-200 dark:ring-gray-700 hover:shadow-2xl transition-shadow">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="p-3 bg-amber-100 dark:bg-amber-900 rounded-xl">
+                        <svg className="w-8 h-8 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243zm0 0l2.879 2.879" />
+                        </svg>
+                      </div>
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Video Trimmer</h3>
+                    </div>
+                    <p className="text-gray-600 dark:text-gray-300 mb-6">
+                      Cut precise segments from your videos with stream‑copy (no re‑encode). Keep original quality, trim in seconds.
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <a
+                        href="/trim-video"
+                        className="inline-flex items-center gap-2 text-amber-600 dark:text-amber-400 font-semibold hover:text-amber-800 dark:hover:text-amber-300"
+                      >
+                        Start Trimming
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                      </a>
+                      <span className="text-xs font-medium px-3 py-1 rounded-full bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300">
+                        Stream‑copy
+                      </span>
+                    </div>
+                  </div>
                 </div>
                 <p className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
-                  Both tools run 100% in your browser using WebAssembly. No data is sent to any server.
+                  All tools run 100% in your browser using WebAssembly. No data is sent to any server.
                 </p>
               </div>
             </div>
@@ -172,7 +200,6 @@ export default function Home() {
         <FAQSection />
       </div>
 
-      <Footer />
     </div>
   );
 }

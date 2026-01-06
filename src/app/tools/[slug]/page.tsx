@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import VideoConverter from "@/components/features/video-converter";
+import PopularConversions from "@/components/seo/popular-conversions";
 import { parseSlug } from "@/config/conversions";
 
 interface PageProps {
@@ -119,6 +120,14 @@ export default async function ToolPage({ params }: PageProps) {
         <p>You can convert files up to several gigabytes, as long as your browser has enough memory. For best performance, we recommend files under 1 GB.</p>
         <h3>Can I convert multiple files at once?</h3>
         <p>Currently, the tool processes one file at a time. You can queue files by converting them sequentially.</p>
+      </div>
+
+      <div className="mt-12">
+        <h2 className="text-3xl font-bold mb-6 text-center">More Tools</h2>
+        <p className="text-center text-gray-600 dark:text-gray-300 mb-8">
+          Explore other popular conversions available on our site.
+        </p>
+        <PopularConversions />
       </div>
     </div>
   );

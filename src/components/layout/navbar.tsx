@@ -8,6 +8,7 @@ const navigation = [
   { name: "Home", href: "/" },
   { name: "Video Compressor", href: "/compress-video" },
   { name: "Video Converter", href: "/convert-video" },
+  { name: "Video Trimmer", href: "/trim-video" },
   { name: "Privacy Policy", href: "/privacy" },
   { name: "Terms of Service", href: "/terms" },
 ];

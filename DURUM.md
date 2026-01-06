@@ -1,5 +1,5 @@
 # DURUM - Proje Dashboard
-**Aktif Task:** TASK-09 - Internal Linking Strategy
+**Aktif Task:** TASK-11 - Video Trimmer & Port Config
 **Durum:** 🟡 Devam Ediyor
 **Faz:** 3 - Multi‑Tool Expansion
 
@@ -10,6 +10,7 @@
 - **TASK-04** tamamlandı. Production build hazırlandı ve deployment için Vercel kuruldu.
 - **TASK-05** tamamlandı. UI tasarımı güncellendi, responsive iyileştirmeler yapıldı, logo eklendi.
 - **TASK-06** tamamlandı. Monetization altyapısı kuruldu, reklam placeholder'ları ve affiliate bağlantıları eklendi.
+- **TASK-10** tamamlandı. Global navigation ve sitemap genişletmesi yapıldı, 151 sayfa oluşturuldu.
 
 ## İlerleme
 - [x] **A.1 Temizlik ve UI Kurulumu** – Shadcn UI init, bileşenler eklendi, page.tsx temizlendi.

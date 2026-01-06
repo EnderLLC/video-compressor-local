@@ -1,5 +1,5 @@
 # DURUM - Proje Dashboard
-**Aktif Task:** TASK-16 - SEO Blog Infrastructure
+**Aktif Task:** TASK-17 - SEO Content Injection
 **Durum:** 🟡 Devam Ediyor
 **Faz:** Growth & SEO
 
@@ -16,6 +16,7 @@
 - **TASK-13** tamamlandı. Video cropper modülü başarıyla çalışıyor, kırpma işlemleri yapılabiliyor.
 - **TASK-14** tamamlandı. Video rotate & flip modülü başarıyla çalışıyor, döndürme ve çevirme işlemleri hatasız çalışıyor.
 - **TASK-15** tamamlandı. Google Search Console sitemap gönderildi, 151 sayfa keşfedildi.
+- **TASK-16** tamamlandı. SEO blog altyapısı kuruldu, /blog sayfası ve dinamik makale sayfaları oluşturuldu.
 
 ## İlerleme
 - [x] **A.1 Temizlik ve UI Kurulumu** – Shadcn UI init, bileşenler eklendi, page.tsx temizlendi.

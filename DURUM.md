@@ -1,7 +1,7 @@
 # DURUM - Proje Dashboard
-**Aktif Task:** TASK-19 - AdSense Readiness (Consent & Ad Slots)
-**Durum:** 🟡 Devam Ediyor
-**Faz:** Growth & SEO
+**Aktif Task:** TASK-20 - Final Polish & AdSense Injection
+**Durum:** 🟢 Final
+**Faz:** FINAL
 
 ## Son Oturum Özetleri
 - **TASK-01** tamamlandı. Kurulum başarıyla yapıldı, FFmpeg.wasm entegre edildi.

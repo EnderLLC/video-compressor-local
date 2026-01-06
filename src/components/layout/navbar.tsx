@@ -10,6 +10,7 @@ const navigation = [
   { name: "Video Converter", href: "/convert-video" },
   { name: "Video Trimmer", href: "/trim-video" },
   { name: "Video Cropper", href: "/crop-video" },
+  { name: "Rotate & Flip", href: "/rotate-video" },
   { name: "Remove Audio", href: "/remove-audio" },
   { name: "Volume Booster", href: "/increase-volume" },
   { name: "Privacy Policy", href: "/privacy" },

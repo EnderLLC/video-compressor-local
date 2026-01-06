@@ -1,5 +1,5 @@
 # DURUM - Proje Dashboard
-**Aktif Task:** TASK-13 - Video Cropper (UI Intense)
+**Aktif Task:** TASK-14 - Rotate & Flip Tools
 **Durum:** 🟡 Devam Ediyor
 **Faz:** 3 - Multi‑Tool Expansion
 
@@ -13,6 +13,7 @@
 - **TASK-10** tamamlandı. Global navigation ve sitemap genişletmesi yapıldı, 151 sayfa oluşturuldu.
 - **TASK-11** tamamlandı. Video trimmer modülü başarıyla çalışıyor, kesme işlemleri hızlı ve hatasız çalışıyor.
 - **TASK-12** tamamlandı. Audio Manager Pack (Mute & Boost) başarıyla çalışıyor, ses kaldırma ve yükseltme işlemleri hatasız çalışıyor.
+- **TASK-13** tamamlandı. Video cropper modülü başarıyla çalışıyor, kırpma işlemleri yapılabiliyor.
 
 ## İlerleme
 - [x] **A.1 Temizlik ve UI Kurulumu** – Shadcn UI init, bileşenler eklendi, page.tsx temizlendi.

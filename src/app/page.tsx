@@ -169,6 +169,34 @@ export default function Home() {
                       </span>
                     </div>
                   </div>
+                  {/* Rotate & Flip Card */}
+                  <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-cyan-50 to-white dark:from-gray-800 dark:to-gray-900 p-8 shadow-xl ring-1 ring-gray-200 dark:ring-gray-700 hover:shadow-2xl transition-shadow">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="p-3 bg-cyan-100 dark:bg-cyan-900 rounded-xl">
+                        <svg className="w-8 h-8 text-cyan-600 dark:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                        </svg>
+                      </div>
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Rotate & Flip</h3>
+                    </div>
+                    <p className="text-gray-600 dark:text-gray-300 mb-6">
+                      Rotate videos 90°, 180°, or flip horizontally/vertically. Fix sideways videos instantly. All processing happens locally.
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <a
+                        href="/rotate-video"
+                        className="inline-flex items-center gap-2 text-cyan-600 dark:text-cyan-400 font-semibold hover:text-cyan-800 dark:hover:text-cyan-300"
+                      >
+                        Start Rotating
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                      </a>
+                      <span className="text-xs font-medium px-3 py-1 rounded-full bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-300">
+                        Orientation
+                      </span>
+                    </div>
+                  </div>
                   {/* Remove Audio Card */}
                   <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-rose-50 to-white dark:from-gray-800 dark:to-gray-900 p-8 shadow-xl ring-1 ring-gray-200 dark:ring-gray-700 hover:shadow-2xl transition-shadow">
                     <div className="flex items-center gap-4 mb-6">

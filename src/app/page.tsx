@@ -141,6 +141,62 @@ export default function Home() {
                       </span>
                     </div>
                   </div>
+                  {/* Remove Audio Card */}
+                  <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-rose-50 to-white dark:from-gray-800 dark:to-gray-900 p-8 shadow-xl ring-1 ring-gray-200 dark:ring-gray-700 hover:shadow-2xl transition-shadow">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="p-3 bg-rose-100 dark:bg-rose-900 rounded-xl">
+                        <svg className="w-8 h-8 text-rose-600 dark:text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.25 9.75 19.5 12m0 0 2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6 4.72-4.72a.75.75 0 0 1 1.28.531V19.189a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.506-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
+                        </svg>
+                      </div>
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Remove Audio</h3>
+                    </div>
+                    <p className="text-gray-600 dark:text-gray-300 mb-6">
+                      Strip the audio track from your videos completely, leaving only the video. No quality loss, processed locally.
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <a
+                        href="/remove-audio"
+                        className="inline-flex items-center gap-2 text-rose-600 dark:text-rose-400 font-semibold hover:text-rose-800 dark:hover:text-rose-300"
+                      >
+                        Start Removing
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                      </a>
+                      <span className="text-xs font-medium px-3 py-1 rounded-full bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-300">
+                        Mute video
+                      </span>
+                    </div>
+                  </div>
+                  {/* Volume Booster Card */}
+                  <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-50 to-white dark:from-gray-800 dark:to-gray-900 p-8 shadow-xl ring-1 ring-gray-200 dark:ring-gray-700 hover:shadow-2xl transition-shadow">
+                    <div className="flex items-center gap-4 mb-6">
+                      <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-xl">
+                        <svg className="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318.664-2.66 1.905A9.76 9.76 0 0 0 1.5 12c0 .898.121 1.768.35 2.595.341 1.24 1.518 1.905 2.659 1.905h1.93l4.5 4.5c.945.945 2.561.276 2.561-1.06V4.06zM18.584 5.106a.75.75 0 0 1 1.06 0c3.808 3.807 3.808 9.98 0 13.788a.75.75 0 0 1-1.06-1.06 8.25 8.25 0 0 0 0-11.668.75.75 0 0 1 0-1.06z" />
+                        </svg>
+                      </div>
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Volume Booster</h3>
+                    </div>
+                    <p className="text-gray-600 dark:text-gray-300 mb-6">
+                      Increase or decrease the audio volume of your videos. Choose a multiplier from 50% to 400%. Video stream stays untouched.
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <a
+                        href="/increase-volume"
+                        className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-semibold hover:text-blue-800 dark:hover:text-blue-300"
+                      >
+                        Start Boosting
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                      </a>
+                      <span className="text-xs font-medium px-3 py-1 rounded-full bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-300">
+                        Volume control
+                      </span>
+                    </div>
+                  </div>
                 </div>
                 <p className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
                   All tools run 100% in your browser using WebAssembly. No data is sent to any server.

@@ -17,6 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Free Video Compressor - Compress MP4/MOV Locally (No Upload)",
   description: "The fastest local video compressor. Reduce file size of MP4, MOV, AVI videos in your browser without uploading to any server. 100% Private & Free.",
+  keywords: ["video compressor", "video converter", "mov to mp4", "avi to mp4", "mkv to mp4", "mp4 to gif", "mp3 extractor", "local video converter", "browser video compression", "no upload video tools"],
 };
 
 export default function RootLayout({

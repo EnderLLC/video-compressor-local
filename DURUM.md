@@ -1,5 +1,5 @@
 # DURUM - Proje Dashboard
-**Aktif Task:** TASK-08 - Programmatic SEO Engine
+**Aktif Task:** TASK-09 - Internal Linking Strategy
 **Durum:** 🟡 Devam Ediyor
 **Faz:** 3 - Multi‑Tool Expansion
 

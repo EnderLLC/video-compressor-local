@@ -1,5 +1,7 @@
 import { LockClosedIcon, BoltIcon, CloudArrowDownIcon } from "@heroicons/react/24/outline";
 import FAQSection from "@/components/home/faq-section";
+import PopularConversions from "@/components/seo/popular-conversions";
+import Footer from "@/components/layout/footer";
 
 export default function Home() {
   // Feature data updated
@@ -163,29 +165,14 @@ export default function Home() {
         </div>
       </div>
 
+      <PopularConversions />
+
       {/* FAQ Section */}
       <div className="mx-auto max-w-7xl px-6 lg:px-8 py-24">
         <FAQSection />
       </div>
 
-      {/* Footer */}
-      <footer className="bg-white dark:bg-gray-900">
-        <div className="mx-auto max-w-7xl overflow-hidden px-6 py-20 sm:py-24 lg:px-8">
-          <div className="mt-10 text-center text-sm/6 text-gray-600 dark:text-gray-400">
-            <p>
-              &copy; {new Date().getFullYear()} Local Media Tools. All rights reserved.
-            </p>
-            <div className="mt-2 flex justify-center gap-6">
-              <a href="/privacy" className="text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300">
-                Privacy Policy
-              </a>
-              <a href="/terms" className="text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300">
-                Terms of Service
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

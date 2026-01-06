@@ -4,6 +4,7 @@ import "./globals.css";
 import Script from "next/script";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
+import CookieBanner from "@/components/ui/cookie-banner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +39,7 @@ export default function RootLayout({
         <Navbar />
         {children}
         <Footer />
+        <CookieBanner />
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
           strategy="afterInteractive"

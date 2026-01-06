@@ -1,5 +1,6 @@
 import VideoCompressor from "@/components/features/video-compressor";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import AdUnit from "@/components/ads/ad-unit";
 
 export const metadata = {
   title: "Video Compressor - Local Media Tools",
@@ -31,6 +32,7 @@ export default function CompressVideoPage() {
               </CardHeader>
               <CardContent>
                 <VideoCompressor />
+                <AdUnit slotId="compress-video-below-buttons" format="rectangle" className="mt-8" />
               </CardContent>
             </Card>
 

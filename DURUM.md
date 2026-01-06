@@ -1,5 +1,5 @@
 # DURUM - Proje Dashboard
-**Aktif Task:** TASK-18 - Scheduled Content System
+**Aktif Task:** TASK-19 - AdSense Readiness (Consent & Ad Slots)
 **Durum:** 🟡 Devam Ediyor
 **Faz:** Growth & SEO
 

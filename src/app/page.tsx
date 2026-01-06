@@ -1,6 +1,7 @@
 import { LockClosedIcon, BoltIcon, CloudArrowDownIcon } from "@heroicons/react/24/outline";
 import FAQSection from "@/components/home/faq-section";
 import PopularConversions from "@/components/seo/popular-conversions";
+import AdUnit from "@/components/ads/ad-unit";
 
 export default function Home() {
   // Feature data updated
@@ -53,6 +54,7 @@ export default function Home() {
             </p>
             <div className="mt-10 flex items-center justify-center">
               <div className="w-full max-w-4xl">
+                <AdUnit slotId="home-above-tools" format="rectangle" className="mb-10" />
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {/* Video Compressor Card */}
                   <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-indigo-50 to-white dark:from-gray-800 dark:to-gray-900 p-8 shadow-xl ring-1 ring-gray-200 dark:ring-gray-700 hover:shadow-2xl transition-shadow">
@@ -254,6 +256,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
+                <AdUnit slotId="home-below-tools" format="leaderboard" className="mt-10" />
                 <p className="mt-8 text-center text-sm text-gray-500 dark:text-gray-400">
                   All tools run 100% in your browser using WebAssembly. No data is sent to any server.
                 </p>

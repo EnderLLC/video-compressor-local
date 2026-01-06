@@ -1,5 +1,6 @@
 import VideoConverter from "@/components/features/video-converter";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import AdUnit from "@/components/ads/ad-unit";
 
 export const metadata = {
   title: "Video Converter - Local Media Tools",
@@ -30,6 +31,7 @@ export default function ConvertVideoPage() {
               </CardHeader>
               <CardContent>
                 <VideoConverter />
+                <AdUnit slotId="convert-video-below-buttons" format="rectangle" className="mt-8" />
               </CardContent>
             </Card>
 

@@ -1,5 +1,5 @@
 # DURUM - Proje Dashboard
-**Aktif Task:** TASK-21 - Manual Ad Units Implementation
+**Aktif Task:** TASK-22 - Content Scheduling Engine
 **Durum:** 🟢 In Progress
 **Faz:** IMPLEMENTATION
 

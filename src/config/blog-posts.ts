@@ -264,16 +264,18 @@ export const BLOG_POSTS: BlogPost[] = [
       </div>
     `,
   },
+  /* {
+    slug: 'scheduled-content-test',
+    title: 'Scheduled Content Test',
+    excerpt: 'This is a scheduled post for testing content visibility based on date.',
+    date: '2027-01-01',
+    relatedTool: null,
+    content: `
+      <div class="prose prose-lg max-w-none">
+        <h2>Scheduled Content Test</h2>
+        <p>This post is scheduled for future publication (2027-01-01). It should be visible in development mode but hidden in production until the date arrives.</p>
+      </div>
+    `,
+  }, */
   // Additional posts can be added here
 ];
-
-// Helper to find a post by slug
-export function getPostBySlug(slug: string): BlogPost | undefined {
-  return BLOG_POSTS.find(post => post.slug === slug);
-}
-
-// Get latest posts (sorted by date)
-export function getLatestPosts(limit?: number): BlogPost[] {
-  const sorted = [...BLOG_POSTS].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  return limit ? sorted.slice(0, limit) : sorted;
-}

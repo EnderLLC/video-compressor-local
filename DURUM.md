@@ -1,5 +1,5 @@
 # DURUM - Proje Dashboard
-**Aktif Task:** TASK-17 - SEO Content Injection
+**Aktif Task:** TASK-18 - Scheduled Content System
 **Durum:** 🟡 Devam Ediyor
 **Faz:** Growth & SEO
 

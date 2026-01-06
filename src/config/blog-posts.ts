@@ -251,6 +251,19 @@ export const BLOG_POSTS: BlogPost[] = [
       </div>
     `,
   },
+  {
+    slug: 'test-future-post',
+    title: 'Test Future Post',
+    excerpt: 'This is a scheduled post for testing future content visibility.',
+    date: '2026-02-01',
+    relatedTool: null,
+    content: `
+      <div class="prose prose-lg max-w-none">
+        <h2>Test Future Post</h2>
+        <p>This post is scheduled for future publication. It should be visible in development mode but hidden in production until the date arrives.</p>
+      </div>
+    `,
+  },
   // Additional posts can be added here
 ];
 

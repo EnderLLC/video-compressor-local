@@ -1,10 +1,17 @@
-import { getPostBySlug } from "@/config/blog-posts";
+import { getPostBySlug, getAllPosts } from "@/lib/blog-utils";
 import { notFound } from "next/navigation";
 import { ArrowRightIcon, CalendarDaysIcon, DocumentTextIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateStaticParams() {
+  const posts = getAllPosts();
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
 }
 
 export async function generateMetadata({ params }: PageProps) {

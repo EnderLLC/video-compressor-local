@@ -1,4 +1,4 @@
-import { BLOG_POSTS } from "@/config/blog-posts";
+import { getAllPosts } from "@/lib/blog-utils";
 import { CalendarDaysIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
@@ -8,7 +8,7 @@ export const metadata = {
 };
 
 export default function BlogPage() {
-  const posts = BLOG_POSTS;
+  const posts = getAllPosts();
 
   return (
     <div className="bg-white dark:bg-gray-900 min-h-screen">

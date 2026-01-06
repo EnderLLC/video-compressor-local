@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { getAllSlugs } from '@/config/conversions';
+import { getAllPosts } from '@/lib/blog-utils';
 
 const baseUrl = 'https://www.local-media-tools.com';
 
@@ -21,5 +22,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...toolRoutes];
+  // Blog posts
+  const blogPosts = getAllPosts();
+  const blogRoutes = blogPosts.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: new Date(post.date),
+    changeFrequency: 'weekly' as const,
+    priority: 0.6,
+  }));
+
+  return [...staticRoutes, ...toolRoutes, ...blogRoutes];
 }

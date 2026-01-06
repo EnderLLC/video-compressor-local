@@ -1,5 +1,5 @@
 # DURUM - Proje Dashboard
-**Aktif Task:** TASK-07 - Architecture Refactor & Video Converter Module
+**Aktif Task:** TASK-08 - Programmatic SEO Engine
 **Durum:** 🟡 Devam Ediyor
 **Faz:** 3 - Multi‑Tool Expansion
 

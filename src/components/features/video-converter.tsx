@@ -19,9 +19,17 @@ const FORMATS = [
 
 type Format = (typeof FORMATS)[number]["value"];
 
-export default function VideoConverter() {
+interface VideoConverterProps {
+  defaultInputFormat?: Format;
+  defaultOutputFormat?: Format;
+}
+
+export default function VideoConverter({
+  defaultInputFormat,
+  defaultOutputFormat,
+}: VideoConverterProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [selectedFormat, setSelectedFormat] = useState<Format>("mp4");
+  const [selectedFormat, setSelectedFormat] = useState<Format>(defaultOutputFormat || "mp4");
   const {
     loadFFmpeg,
     convertVideo,
@@ -84,9 +92,16 @@ export default function VideoConverter() {
           <CardContent className="space-y-6">
             {/* Format Selection */}
             <div className="space-y-2">
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                Target Format
-              </label>
+              <div className="flex items-center justify-between">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                  Target Format
+                </label>
+                {defaultInputFormat && (
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200">
+                    Source: {defaultInputFormat.toUpperCase()}
+                  </span>
+                )}
+              </div>
               <select
                 className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
                 value={selectedFormat}

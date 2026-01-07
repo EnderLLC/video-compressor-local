@@ -1,5 +1,5 @@
 # DURUM - Proje Dashboard
-**Aktif Task:** TASK-23 - Video to GIF Converter
+**Aktif Task:** TASK-24 - Workspace & Recent Files (IndexedDB)
 **Durum:** 🟢 In Progress
 **Faz:** IMPLEMENTATION
 
@@ -18,6 +18,7 @@
 - **TASK-15** tamamlandı. Google Search Console sitemap gönderildi, 151 sayfa keşfedildi.
 - **TASK-16** tamamlandı. SEO blog altyapısı kuruldu, /blog sayfası ve dinamik makale sayfaları oluşturuldu.
 - **TASK-22** tamamlandı. Content Scheduling Engine başarıyla entegre edildi.
+- **TASK-23** tamamlandı. Video to GIF Converter başarıyla çalışıyor, GIF üretimi hatasız çalışıyor.
 
 ## İlerleme
 - [x] **A.1 Temizlik ve UI Kurulumu** – Shadcn UI init, bileşenler eklendi, page.tsx temizlendi.

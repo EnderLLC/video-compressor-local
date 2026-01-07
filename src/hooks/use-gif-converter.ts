@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback, useRef } from "react";
+import { useWorkspace } from "@/context/workspace-context";
 
 type GifOptions = {
   fps?: number;      // Frames per second (default 10)
@@ -16,6 +17,7 @@ export function useGifConverter() {
   const [error, setError] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
+  const { saveFile } = useWorkspace();
 
   const loadFFmpeg = useCallback(async () => {
     if (loaded) return;
@@ -65,7 +67,7 @@ export function useGifConverter() {
 
   const buildGifFilter = useCallback((fps: number, width: number | null): string[] => {
     // If width is 0 or null, keep original size
-    const scale = width && width > 0 ? `scale=${width}:-1:flags=lanczos` : "";
+    const scale = width && width > 0 ? `scale=${width}:-2:flags=lanczos` : "";
     const filters = [];
     if (fps) filters.push(`fps=${fps}`);
     if (scale) filters.push(scale);
@@ -109,6 +111,16 @@ export function useGifConverter() {
       const url = URL.createObjectURL(outputBlob);
       setOutputUrl(url);
       setProgress(100);
+      // Save to workspace
+      try {
+        await saveFile(outputBlob, {
+          name: `converted_${file.name.replace(/\.[^/.]+$/, "")}.gif`,
+          type: "gif",
+          tool: "gif-converter",
+        });
+      } catch (err) {
+        console.warn("Failed to save file to workspace:", err);
+      }
       return url;
     } catch (err) {
       const errMsg = `GIF conversion failed: ${err instanceof Error ? err.message : String(err)}`;
@@ -117,7 +129,7 @@ export function useGifConverter() {
     } finally {
       setIsProcessing(false);
     }
-  }, [loaded, loadFFmpeg, buildGifFilter]);
+  }, [loaded, loadFFmpeg, buildGifFilter, saveFile]);
 
   const reset = useCallback(() => {
     setError(null);

@@ -5,6 +5,8 @@ import Script from "next/script";
 import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import CookieBanner from "@/components/ui/cookie-banner";
+import { WorkspaceProvider } from "@/context/workspace-context";
+import { RecentFilesDrawer } from "@/components/layout/recent-files-drawer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,10 +38,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased pt-16`}
       >
-        <Navbar />
-        {children}
-        <Footer />
-        <CookieBanner />
+        <WorkspaceProvider>
+          <Navbar />
+          {children}
+          <Footer />
+          <CookieBanner />
+          <RecentFilesDrawer />
+        </WorkspaceProvider>
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
           strategy="afterInteractive"

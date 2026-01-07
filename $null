@@ -1,0 +1,7 @@
+Invoke-WebRequest : Object reference not set to an instance of an object.
+At line:1 char:2
++ (Invoke-WebRequest -Uri http://localhost:3002 -Method Head -TimeoutSe ...
++  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Invoke-WebRequest], NullReferenceException
+    + FullyQualifiedErrorId : System.NullReferenceException,Microsoft.PowerShell.Commands.InvokeWebRequestCommand
+ 

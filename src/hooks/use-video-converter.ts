@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback, useRef } from "react";
+import { useWorkspace } from "@/context/workspace-context";
 
 type Format = "mp4" | "mov" | "mkv" | "avi" | "webm" | "wmv" | "flv" | "ogv" | "3gp" | "mp3" | "wav" | "ogg" | "m4a" | "wma" | "gif";
 
@@ -13,6 +14,7 @@ export function useVideoConverter() {
   const [error, setError] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const [outputUrl, setOutputUrl] = useState<string | null>(null);
+  const { saveFile } = useWorkspace();
 
   const loadFFmpeg = useCallback(async () => {
     if (loaded) return;
@@ -154,6 +156,16 @@ export function useVideoConverter() {
       const url = URL.createObjectURL(outputBlob);
       setOutputUrl(url);
       setProgress(100);
+      // Save to workspace
+      try {
+        await saveFile(outputBlob, {
+          name: `converted_${file.name.replace(/\.[^/.]+$/, "")}.${getOutputExtension(format)}`,
+          type: format === 'gif' ? 'gif' : (['mp3','wav','ogg','m4a','wma'].includes(format) ? 'audio' : 'video'),
+          tool: `video-converter`,
+        });
+      } catch (err) {
+        console.warn("Failed to save file to workspace:", err);
+      }
       return url;
     } catch (err) {
       const errMsg = `Conversion failed: ${err instanceof Error ? err.message : String(err)}`;
@@ -162,7 +174,7 @@ export function useVideoConverter() {
     } finally {
       setIsProcessing(false);
     }
-  }, [loaded, loadFFmpeg, getCommandForFormat, getOutputExtension, getMimeType]);
+  }, [loaded, loadFFmpeg, getCommandForFormat, getOutputExtension, getMimeType, saveFile]);
 
   const reset = useCallback(() => {
     setError(null);

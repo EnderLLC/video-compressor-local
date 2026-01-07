@@ -14,6 +14,7 @@ const navigation = [
   { name: "Remove Audio", href: "/remove-audio" },
   { name: "Volume Booster", href: "/increase-volume" },
   { name: "Video to GIF", href: "/video-to-gif" },
+  { name: "Video Speed", href: "/video-speed" },
   { name: "Blog", href: "/blog" },
   { name: "Privacy Policy", href: "/privacy" },
   { name: "Terms of Service", href: "/terms" },

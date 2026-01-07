@@ -4,13 +4,14 @@
 
 ## Current Active Task
 
-**TASK‑25 – PWA Module (Manifest & Installability)**  
-**Status:** 🟢 In Progress  
-**Phase:** IMPLEMENTATION  
+**TASK‑27 – Video Speed Controller**
+**Status:** 🟢 In Progress
+**Phase:** IMPLEMENTATION
 
-- Implement Web App Manifest (`src/app/manifest.ts`).
-- Add service‑worker support for offline caching (optional).
-- Validate installability across browsers.
+- Create speed control hook (`use‑video‑speed.ts`).
+- Build UI component for speed selection.
+- Integrate speed adjustment page.
+- Test with FFmpeg filters.
 
 ## Completed Tasks
 
@@ -37,6 +38,8 @@
 | TASK‑22 | Scheduling Engine Enhancement | Improved scheduling logic. |
 | TASK‑23 | GIF Maker Module | `use‑gif‑converter` hook, GIF‑specific UI. |
 | TASK‑24 | Workspace & Recent Files | IndexedDB storage, Recent Files drawer, workspace context. |
+| TASK‑25 | PWA Module (Manifest & Installability) | Implemented Web App Manifest, added PWA installability. |
+| TASK‑26 | Documentation Restructure | Improved documentation structure and task tracking. |
 
 ## Pending / Future Tasks
 

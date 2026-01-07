@@ -1,5 +1,5 @@
 # DURUM - Proje Dashboard
-**Aktif Task:** TASK-24 - Workspace & Recent Files (IndexedDB)
+**Aktif Task:** TASK-25 - PWA Module (Manifest & Installability)
 **Durum:** 🟢 In Progress
 **Faz:** IMPLEMENTATION
 
@@ -19,6 +19,7 @@
 - **TASK-16** tamamlandı. SEO blog altyapısı kuruldu, /blog sayfası ve dinamik makale sayfaları oluşturuldu.
 - **TASK-22** tamamlandı. Content Scheduling Engine başarıyla entegre edildi.
 - **TASK-23** tamamlandı. Video to GIF Converter başarıyla çalışıyor, GIF üretimi hatasız çalışıyor.
+- **TASK-24** tamamlandı. Workspace & Recent Files (IndexedDB) modülü başarıyla çalışıyor, kullanıcı dosya geçmişi saklanabiliyor.
 
 ## İlerleme
 - [x] **A.1 Temizlik ve UI Kurulumu** – Shadcn UI init, bileşenler eklendi, page.tsx temizlendi.

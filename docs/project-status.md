@@ -4,14 +4,14 @@
 
 ## Current Active Task
 
-**TASK‑27 – Video Speed Controller**
+**TASK‑28 – Screen Recorder**
 **Status:** 🟢 In Progress
 **Phase:** IMPLEMENTATION
 
-- Create speed control hook (`use‑video‑speed.ts`).
-- Build UI component for speed selection.
-- Integrate speed adjustment page.
-- Test with FFmpeg filters.
+- Create screen recorder hook (`use‑screen‑recorder.ts`).
+- Build UI component with recording controls.
+- Integrate screen recording page.
+- Test with MediaRecorder API.
 
 ## Completed Tasks
 
@@ -40,6 +40,7 @@
 | TASK‑24 | Workspace & Recent Files | IndexedDB storage, Recent Files drawer, workspace context. |
 | TASK‑25 | PWA Module (Manifest & Installability) | Implemented Web App Manifest, added PWA installability. |
 | TASK‑26 | Documentation Restructure | Improved documentation structure and task tracking. |
+| TASK‑27 | Video Speed Controller | Speed adjustment hook, UI component, and page integration. |
 
 ## Pending / Future Tasks
 

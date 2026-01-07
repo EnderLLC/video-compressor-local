@@ -283,6 +283,34 @@ export default function Home() {
                         Volume control
                       </span>
                     </div>
+                    {/* Screen Recorder Card */}
+                    <div className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-red-50 to-white dark:from-gray-800 dark:to-gray-900 p-8 shadow-xl ring-1 ring-gray-200 dark:ring-gray-700 hover:shadow-2xl transition-shadow">
+                      <div className="flex items-center gap-4 mb-6">
+                        <div className="p-3 bg-red-100 dark:bg-red-900 rounded-xl">
+                          <svg className="w-8 h-8 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                          </svg>
+                        </div>
+                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Screen Recorder</h3>
+                      </div>
+                      <p className="text-gray-600 dark:text-gray-300 mb-6">
+                        Record your screen, window, or tab directly in your browser. No extensions, no watermarks, unlimited recording time.
+                      </p>
+                      <div className="flex items-center justify-between">
+                        <a
+                          href="/screen-recorder"
+                          className="inline-flex items-center gap-2 text-red-600 dark:text-red-400 font-semibold hover:text-red-800 dark:hover:text-red-300"
+                        >
+                          Start Recording
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                          </svg>
+                        </a>
+                        <span className="text-xs font-medium px-3 py-1 rounded-full bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300">
+                          No uploads
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <AdUnit slotId={AD_SLOTS.homepage} format="leaderboard" className="mt-10" />

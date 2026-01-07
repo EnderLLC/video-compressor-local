@@ -1,5 +1,5 @@
 # DURUM - Proje Dashboard
-**Aktif Task:** TASK-22 - Content Scheduling Engine
+**Aktif Task:** TASK-23 - Video to GIF Converter
 **Durum:** 🟢 In Progress
 **Faz:** IMPLEMENTATION
 
@@ -17,6 +17,7 @@
 - **TASK-14** tamamlandı. Video rotate & flip modülü başarıyla çalışıyor, döndürme ve çevirme işlemleri hatasız çalışıyor.
 - **TASK-15** tamamlandı. Google Search Console sitemap gönderildi, 151 sayfa keşfedildi.
 - **TASK-16** tamamlandı. SEO blog altyapısı kuruldu, /blog sayfası ve dinamik makale sayfaları oluşturuldu.
+- **TASK-22** tamamlandı. Content Scheduling Engine başarıyla entegre edildi.
 
 ## İlerleme
 - [x] **A.1 Temizlik ve UI Kurulumu** – Shadcn UI init, bileşenler eklendi, page.tsx temizlendi.

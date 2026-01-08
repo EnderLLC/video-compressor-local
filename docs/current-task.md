@@ -1,50 +1,50 @@
-# TASK-31: Reverse Video Tool
+# TASK-32: Loop Video Tool (Repeater)
 
 **Durum:** 🟢 Aktif
 **Öncelik:** 🎬 Video Editing Tools
 
 ## 🎯 HEDEF
-Videoyu (hem görüntü hem ses) tersten oynatacak şekilde yeniden işlemek.
+Kullanıcının yüklediği videoyu, seçilen sayı kadar arka arkaya ekleyip (Loop) uzatmak.
 
 ## 📋 ALT GÖREVLER
 - [x] **ADIM 1: Dokümantasyon**
-  - [x] `docs/project-status.md` dosyasını güncelle (Aktif Task: TASK-31).
-  - [x] `docs/current-task.md` dosyasını arşivle (`docs/archive/TASK-30-ADD-AUDIO.md`).
-  - [x] `docs/current-task.md` dosyasını temizle ve TASK-31 için hazırla.
-- [ ] **ADIM 2: Reverse Logic (Hook)**
-  - [ ] `src/hooks/use-video-reverser.ts` oluştur.
+  - [x] `docs/project-status.md` dosyasını güncelle (Aktif Task: TASK-32).
+  - [x] `docs/current-task.md` dosyasını arşivle (`docs/archive/TASK-31-REVERSE.md`).
+  - [x] `docs/current-task.md` dosyasını temizle ve TASK-32 için hazırla.
+- [ ] **ADIM 2: Loop Logic (Hook)**
+  - [ ] `src/hooks/use-video-looper.ts` oluştur.
   - **FFmpeg Mantığı:**
-    - Görüntü ve sesi tersine çevir.
-    - Komut: `-i input.mp4 -vf reverse -af areverse output.mp4`
-    - **Bellek Uyarısı:** Reverse işlemi tüm videoyu RAM'e tamponlar. Eğer dosya çok büyükse tarayıcı çökebilir. Hook içinde dosya boyutu kontrolü (örn: >100MB ise uyarı) veya `try-catch` ile kullanıcıya "Dosya çok büyük" hatası döndürme mantığı ekle.
+    - Parametre: `loopCount` (Örn: 2, 3, 5, 10).
+    - Komut: `-stream_loop {loopCount - 1} -i input.mp4 -c copy output.mp4`
+    - *Not:* FFmpeg'de `stream_loop` kaç kere "ekleneceğini" belirtir. Yani videonun toplam 3 kere oynaması için loop değerinin 2 olması gerekir. (Logic: `param = userSelection - 1`).
+    - `-c copy` kullandığımız için işlem çok hızlı olmalı.
 - [ ] **ADIM 3: UI Bileşeni**
-  - [ ] `src/components/features/video-reverser.tsx` oluştur.
+  - [ ] `src/components/features/video-looper.tsx` oluştur.
   - **Tasarım:**
-    - Basit bir Dropzone.
-    - "Mute Audio" seçeneği (Tersine çevrilmiş sesler genelde korkutucu olur, kullanıcı kapatmak isteyebilir).
-    - Eğer kullanıcı Mute seçerse komuttan `-af areverse` kısmını çıkar ve `-an` (audio none) ekle.
-    - Uyarı Notu: "Processing requires loading the entire video into memory. Short videos work best."
+    - Dropzone.
+    - **Loop Ayarı:** "Repeat Times" -> [2x, 3x, 4x, 5x, 10x, Infinite(Gif? - Şimdilik sayısal kalsın)].
+    - Bilgi Notu: "Uses stream copy for lightning-fast processing."
 - [ ] **ADIM 4: Sayfa ve Entegrasyon**
-  - [ ] `src/app/reverse-video/page.tsx` oluştur.
-  - **Metadata:** Title: "Reverse Video Online - Rewind MP4 Effects".
-  - **Global:** Navbar, Footer ve Ana Sayfa Grid'ine "Reverse Video" linklerini ekle.
-  - **Standartlar:** Reklam (`AD_SLOTS.tool`) ve Workspace (`saveFile`) entegrasyonu.
+  - [ ] `src/app/loop-video/page.tsx` oluştur.
+  - **Metadata:** Title: "Loop Video Online - Repeat MP4 Automatically".
+  - **Global:** Navbar, Footer ve Ana Sayfa Grid'ine "Loop Video" linklerini ekle. (Bir önceki taskta atlanan Grid eklemesini burada telafi etmeyi unutma).
+  - **Reklam & Workspace:** Standart entegrasyon (`AD_SLOTS.tool`, `saveFile`).
 - [ ] **ADIM 5: Test**
   - [ ] `npm run dev` ile test et.
-  - [ ] Kısa bir video (5-10 sn) yükle ve tersine çevir.
-  - [ ] Sonuçta hareketlerin geri geri gittiğini doğrula.
+  - [ ] 2 saniyelik bir video yükle, 5x seç.
+  - [ ] Çıkan videonun 10 saniye olduğunu ve kalite kaybı olmadığını doğrula.
 
 ## ✅ TAMAMLANMA KRİTERLERİ
-- [ ] `use-video-reverser.ts` hook'u oluşturuldu ve FFmpeg ile çalışıyor.
-- [ ] `video-reverser.tsx` bileşeni oluşturuldu, mute audio seçeneği çalışıyor.
-- [ ] `reverse-video/page.tsx` sayfası oluşturuldu, metadata ve ads entegrasyonu tamam.
-- [ ] Navbar ve Footer'da "Reverse Video" linki eklendi.
-- [ ] Test sonucu: Video başarıyla tersine çevrildi, indirilebiliyor.
+- [ ] `use-video-looper.ts` hook'u oluşturuldu ve FFmpeg ile çalışıyor.
+- [ ] `video-looper.tsx` bileşeni oluşturuldu, loop count seçimi çalışıyor.
+- [ ] `loop-video/page.tsx` sayfası oluşturuldu, metadata ve ads entegrasyonu tamam.
+- [ ] Navbar, Footer ve Ana Sayfa Grid'inde "Loop Video" linki eklendi.
+- [ ] Test sonucu: Video başarıyla loop'landı, süre doğru, kalite kaybı yok.
 
 ## 📂 İLGİLİ DOSYALAR
-- `src/hooks/use-video-reverser.ts`
-- `src/components/features/video-reverser.tsx`
-- `src/app/reverse-video/page.tsx`
+- `src/hooks/use-video-looper.ts`
+- `src/components/features/video-looper.tsx`
+- `src/app/loop-video/page.tsx`
 - `src/config/ads.ts`
 - `src/components/layout/navbar.tsx`
 - `src/components/layout/footer.tsx`

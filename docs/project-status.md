@@ -4,13 +4,13 @@
 
 ## Current Active Task
 
-**TASK‑31 – Reverse Video Tool**
+**TASK‑32 – Loop Video Tool (Repeater)**
 **Status:** 🟢 In Progress
 **Phase:** IMPLEMENTATION
 
-- Create video reverser hook (`use‑video‑reverser.ts`).
-- Build UI component with mute audio option.
-- Integrate reverse‑video page.
+- Create video looper hook (`use‑video‑looper.ts`).
+- Build UI component with loop count selection.
+- Integrate loop‑video page.
 - Test with short video.
 
 ## Completed Tasks
@@ -43,6 +43,8 @@
 | TASK‑27 | Video Speed Controller | Speed adjustment hook, UI component, and page integration. |
 | TASK‑28 | Screen Recorder | Screen recording hook, UI component, and page integration. |
 | TASK‑29 | Video Merger (Joiner) | `use‑video‑merger` hook, multi‑file dropzone, reordering UI, merge video page. |
+| TASK‑30 | Add Audio to Video (Muxer) | `use‑audio‑muxer` hook, video/audio upload, replace audio without re‑encoding. |
+| TASK‑31 | Reverse Video Tool | `use‑video‑reverser` hook, mute audio option, reverse both video and audio streams. |
 
 ## Pending / Future Tasks
 

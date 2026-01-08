@@ -17,6 +17,7 @@ const navigation = [
   { name: "Video Speed", href: "/video-speed" },
   { name: "Video Merger", href: "/merge-video" },
   { name: "Add Audio", href: "/add-audio" },
+  { name: "Reverse Video", href: "/reverse-video" },
   { name: "Screen Recorder", href: "/screen-recorder" },
   { name: "Blog", href: "/blog" },
   { name: "Privacy Policy", href: "/privacy" },

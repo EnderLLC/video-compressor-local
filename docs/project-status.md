@@ -4,14 +4,14 @@
 
 ## Current Active Task
 
-**TASK‑30 – Add Audio to Video (Muxer)**
+**TASK‑31 – Reverse Video Tool**
 **Status:** 🟢 In Progress
 **Phase:** IMPLEMENTATION
 
-- Create audio muxer hook (`use‑audio‑muxer.ts`).
-- Build UI component with video and audio upload.
-- Integrate add‑audio page.
-- Test with FFmpeg audio replacement.
+- Create video reverser hook (`use‑video‑reverser.ts`).
+- Build UI component with mute audio option.
+- Integrate reverse‑video page.
+- Test with short video.
 
 ## Completed Tasks
 

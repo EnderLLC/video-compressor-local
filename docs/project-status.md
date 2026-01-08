@@ -4,14 +4,14 @@
 
 ## Current Active Task
 
-**TASK‑28 – Screen Recorder**
+**TASK‑29 – Video Merger (Joiner)**
 **Status:** 🟢 In Progress
 **Phase:** IMPLEMENTATION
 
-- Create screen recorder hook (`use‑screen‑recorder.ts`).
-- Build UI component with recording controls.
-- Integrate screen recording page.
-- Test with MediaRecorder API.
+- Create video merger hook (`use‑video‑merger.ts`).
+- Build UI component with multi‑file dropzone and reordering.
+- Integrate merge video page.
+- Test with FFmpeg concatenation.
 
 ## Completed Tasks
 
@@ -41,6 +41,7 @@
 | TASK‑25 | PWA Module (Manifest & Installability) | Implemented Web App Manifest, added PWA installability. |
 | TASK‑26 | Documentation Restructure | Improved documentation structure and task tracking. |
 | TASK‑27 | Video Speed Controller | Speed adjustment hook, UI component, and page integration. |
+| TASK‑28 | Screen Recorder | Screen recording hook, UI component, and page integration. |
 
 ## Pending / Future Tasks
 

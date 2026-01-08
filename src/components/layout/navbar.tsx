@@ -16,6 +16,7 @@ const navigation = [
   { name: "Video to GIF", href: "/video-to-gif" },
   { name: "Video Speed", href: "/video-speed" },
   { name: "Video Merger", href: "/merge-video" },
+  { name: "Add Audio", href: "/add-audio" },
   { name: "Screen Recorder", href: "/screen-recorder" },
   { name: "Blog", href: "/blog" },
   { name: "Privacy Policy", href: "/privacy" },

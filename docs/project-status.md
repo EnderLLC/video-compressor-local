@@ -4,14 +4,14 @@
 
 ## Current Active Task
 
-**TASK‑29 – Video Merger (Joiner)**
+**TASK‑30 – Add Audio to Video (Muxer)**
 **Status:** 🟢 In Progress
 **Phase:** IMPLEMENTATION
 
-- Create video merger hook (`use‑video‑merger.ts`).
-- Build UI component with multi‑file dropzone and reordering.
-- Integrate merge video page.
-- Test with FFmpeg concatenation.
+- Create audio muxer hook (`use‑audio‑muxer.ts`).
+- Build UI component with video and audio upload.
+- Integrate add‑audio page.
+- Test with FFmpeg audio replacement.
 
 ## Completed Tasks
 
@@ -42,6 +42,7 @@
 | TASK‑26 | Documentation Restructure | Improved documentation structure and task tracking. |
 | TASK‑27 | Video Speed Controller | Speed adjustment hook, UI component, and page integration. |
 | TASK‑28 | Screen Recorder | Screen recording hook, UI component, and page integration. |
+| TASK‑29 | Video Merger (Joiner) | `use‑video‑merger` hook, multi‑file dropzone, reordering UI, merge video page. |
 
 ## Pending / Future Tasks
 

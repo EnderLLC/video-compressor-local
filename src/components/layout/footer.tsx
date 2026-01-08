@@ -95,6 +95,14 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href="/add-audio"
+                  className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                >
+                  Add Audio
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/screen-recorder"
                   className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                 >

@@ -112,6 +112,18 @@ export default function Home() {
       ),
     },
     {
+      title: "Audio Converter",
+      description: "Extract audio from video or convert sound files between MP3, WAV, AAC, M4A, OGG. All processing happens locally.",
+      href: "/audio-converter",
+      color: "pink",
+      tag: "Audio extractor",
+      icon: (
+        <svg className="w-8 h-8 text-pink-600 dark:text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z" />
+        </svg>
+      ),
+    },
+    {
       title: "Video to GIF",
       description: "Convert any video to a high‑quality animated GIF with adjustable FPS and size. Everything runs locally, no uploads.",
       href: "/video-to-gif",

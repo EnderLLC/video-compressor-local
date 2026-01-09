@@ -13,6 +13,7 @@ const navigation = [
   { name: "Rotate & Flip", href: "/rotate-video" },
   { name: "Remove Audio", href: "/remove-audio" },
   { name: "Volume Booster", href: "/increase-volume" },
+  { name: "Audio Converter", href: "/audio-converter" },
   { name: "Video to GIF", href: "/video-to-gif" },
   { name: "Video Speed", href: "/video-speed" },
   { name: "Video Merger", href: "/merge-video" },

@@ -1,58 +1,61 @@
-# TASK-33: Images to Video (Slideshow Maker)
+# TASK-34: Audio Converter & Extractor
 
 **Durum:** 🟢 Aktif
-**Öncelik:** 🎬 Video Editing Tools
+**Öncelik:** 🎬 Audio Tools
 
 ## 🎯 HEDEF
-Kullanıcının birden fazla resim yükleyip, bunları videoya dönüştürmesini sağlamak.
+Kullanıcının video veya ses dosyalarından ses ayıklamasını (MP4 -> MP3) veya ses formatlarını dönüştürmesini (WAV -> MP3) sağlamak.
 
 ## 📋 ALT GÖREVLER
 - [x] **ADIM 1: Dokümantasyon**
-  - [x] `docs/project-status.md` dosyasını güncelle (Aktif Task: TASK-33).
-  - [x] `docs/current-task.md` dosyasını arşivle (`docs/archive/TASK-32-LOOP.md`).
-  - [x] `docs/current-task.md` dosyasını temizle ve TASK-33 için hazırla.
-- [ ] **ADIM 2: KRİTİK BAKIM - Ana Sayfa Grid Refactor**
-  - [ ] `src/app/page.tsx` dosyasını aç.
-  - [ ] Şu anki hardcoded veya karışık grid yapısını temizle.
-  - [ ] **Data-Driven Yapı:** Sayfanın üst kısmında `TOOLS` adında bir array oluştur. Tüm araçların (Compress, Convert, Trim, Audio, Crop, Rotate, GIF, Speed, Recorder, Merger, Add Audio, Reverse, Loop, ve şimdi ekleyeceğimiz Slideshow) verilerini (title, description, icon, href, color) burada tanımla.
-  - [ ] Grid içinde bu array'i `map` ile dön.
-  - [ ] **Eksikleri Ekle:** Reverse ve Loop araçlarının kartlarının göründüğünden emin ol.
-- [ ] **ADIM 3: Slideshow Logic (Hook)**
-  - [ ] `src/hooks/use-slideshow.ts` oluştur.
-  - **Girdi:** `File[]` (Resimler).
-  - **Parametre:** `durationPerSlide` (Saniye, örn: 2, 3, 5).
+  - [x] `docs/project-status.md` dosyasını güncelle (Aktif Task: TASK-34).
+  - [x] `docs/current-task.md` dosyasını arşivle (`docs/archive/TASK-33-SLIDESHOW.md`).
+  - [x] `docs/current-task.md` dosyasını temizle ve TASK-34 için hazırla.
+- [ ] **ADIM 2: Audio Logic (Hook)**
+  - [ ] `src/hooks/use-audio-converter.ts` oluştur.
+  - **Girdi:** Video veya Ses dosyası (`File`).
+  - **Parametre:** `targetFormat` (mp3, wav, aac, m4a, ogg).
   - **FFmpeg Mantığı:**
-    - Resimleri belirli bir kare hızında (framerate) okuyarak videoya çevir.
-    - Komut (Basitleştirilmiş): `-framerate 1/{duration} -i image%d.jpg -c:v libx264 -r 30 -pix_fmt yuv420p output.mp4`
-    - *Not:* FFmpeg.wasm dosya sistemine resimleri `img001.jpg`, `img002.jpg` gibi sıralı yazman gerekecek. Hook içinde önce dosyaları sanal dosya sistemine yaz, sonra komutu çalıştır.
-- [ ] **ADIM 4: UI Bileşeni**
-  - [ ] `src/components/features/slideshow-maker.tsx` oluştur.
+    - Komut: `-i input.file -vn -acodec {codec} output.{format}`
+    - **Codec Eşleşmeleri:**
+      - mp3 -> `libmp3lame` (Standart) veya `mp3`
+      - aac -> `aac`
+      - wav -> `pcm_s16le`
+      - ogg -> `libvorbis`
+      - m4a -> `aac`
+    - *İpucu:* `-vn` parametresi "Video None" demektir, videoyu atar ve sadece sesi işler.
+  - **Çıktı:** Dönüştürülmüş ses dosyası.
+- [ ] **ADIM 3: UI Bileşeni**
+  - [ ] `src/components/features/audio-converter.tsx` oluştur.
   - **Tasarım:**
-    - Multi-file Dropzone (Sadece resim).
-    - Resim Sıralama Listesi (Video Merger'daki gibi yukarı/aşağı taşıma).
-    - "Duration per Image" ayarı (Input veya Select).
-    - "Create Video" butonu.
-- [ ] **ADIM 5: Sayfa ve Entegrasyon**
-  - [ ] `src/app/slideshow/page.tsx` oluştur.
-  - **Metadata:** Title: "Images to Video Online - Create Slideshow from Photos".
-  - **Global:** Navbar ve Footer'a "Slideshow" linkini ekle.
-  - **Grid:** `src/app/page.tsx` içindeki yeni `TOOLS` array'ine Slideshow aracını ekle.
-- [ ] **Bitiş:**
+    - Dropzone (Video VE Ses dosyalarını kabul etmeli: `accept: {'audio/*': [], 'video/*': []}`).
+    - **Format Seçimi:** Güzel bir Select veya Radio Group (MP3, WAV, AAC, M4A, OGG). Varsayılan: MP3.
+    - "Convert" butonu.
+- [ ] **ADIM 4: Sayfa ve Entegrasyon**
+  - [ ] `src/app/audio-converter/page.tsx` oluştur.
+  - **Metadata:** Title: "Audio Converter Online - Extract MP3 from Video".
+  - **Global:** Navbar ve Footer'a "Audio Converter" linkini ekle.
+  - **Grid (Kolay Yöntem):** `src/app/page.tsx` içindeki `TOOLS` array'ine yeni aracı ekle:
+    - Title: "Audio Converter"
+    - Desc: "Extract audio from video or convert sound files."
+    - Icon: `Music` (Lucide-react'tan).
+    - Color: "bg-pink-500" (veya uygun bir renk).
+- [ ] **ADIM 5: Test**
   - [ ] `npm run dev` ile test et.
-  - [ ] Ana sayfada TÜM araçların (Reverse, Loop, Slideshow dahil) düzgün sıralandığını gör.
-  - [ ] 3 resim yükle, videoya çevir ve oynat.
+  - [ ] Bir MP4 video yükle, MP3 seç ve dönüştür.
+  - [ ] İnen dosyanın sadece ses çaldığını teyit et.
 
 ## ✅ TAMAMLANMA KRİTERLERİ
-- [ ] `use-slideshow.ts` hook'u oluşturuldu ve FFmpeg ile çalışıyor.
-- [ ] `slideshow-maker.tsx` bileşeni oluşturuldu, image ordering ve duration seçimi çalışıyor.
-- [ ] `slideshow/page.tsx` sayfası oluşturuldu, metadata ve ads entegrasyonu tamam.
-- [ ] Navbar, Footer ve Ana Sayfa Grid'inde "Slideshow" linki eklendi.
-- [ ] Test sonucu: Başarıyla slideshow video oluşturuldu, süre doğru, kalite kaybı yok.
+- [ ] `use-audio-converter.ts` hook'u oluşturuldu ve FFmpeg ile çalışıyor.
+- [ ] `audio-converter.tsx` bileşeni oluşturuldu, format seçimi ve dropzone doğru çalışıyor.
+- [ ] `audio-converter/page.tsx` sayfası oluşturuldu, metadata ve ads entegrasyonu tamam.
+- [ ] Navbar, Footer ve Ana Sayfa Grid'inde "Audio Converter" linki eklendi.
+- [ ] Test sonucu: Video'dan MP3 başarıyla ayıklandı, sadece ses içeriyor.
 
 ## 📂 İLGİLİ DOSYALAR
-- `src/hooks/use-slideshow.ts`
-- `src/components/features/slideshow-maker.tsx`
-- `src/app/slideshow/page.tsx`
+- `src/hooks/use-audio-converter.ts`
+- `src/components/features/audio-converter.tsx`
+- `src/app/audio-converter/page.tsx`
 - `src/config/ads.ts`
 - `src/components/layout/navbar.tsx`
 - `src/components/layout/footer.tsx`

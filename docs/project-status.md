@@ -4,14 +4,14 @@
 
 ## Current Active Task
 
-**TASK‑33 – Images to Video (Slideshow Maker)**
+**TASK‑34 – Audio Converter & Extractor**
 **Status:** 🟢 In Progress
 **Phase:** IMPLEMENTATION
 
-- Create slideshow hook (`use‑slideshow.ts`).
-- Build UI component with image ordering and duration per slide.
-- Integrate slideshow page.
-- Test with multiple images.
+- Create audio converter hook (`use‑audio‑converter.ts`).
+- Build UI component with format selection and dropzone.
+- Integrate audio converter page.
+- Test with video and audio files.
 
 ## Completed Tasks
 
@@ -46,6 +46,7 @@
 | TASK‑30 | Add Audio to Video (Muxer) | `use‑audio‑muxer` hook, video/audio upload, replace audio without re‑encoding. |
 | TASK‑31 | Reverse Video Tool | `use‑video‑reverser` hook, mute audio option, reverse both video and audio streams. |
 | TASK‑32 | Loop Video Tool (Repeater) | `use‑video‑looper` hook, loop count selection, stream‑copy fast processing. |
+| TASK‑33 | Images to Video (Slideshow Maker) | `use‑slideshow` hook, image ordering, duration per slide, slideshow page. |
 
 ## Pending / Future Tasks
 

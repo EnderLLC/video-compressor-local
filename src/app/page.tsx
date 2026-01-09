@@ -24,6 +24,211 @@ export default function Home() {
     },
   ];
 
+  // Tools grid data – all tools in one array for easy maintenance
+  const TOOLS = [
+    {
+      title: "Video Compressor",
+      description: "Reduce video file size securely without uploading. Perfect for saving space or preparing videos for sharing.",
+      href: "/compress-video",
+      color: "indigo",
+      tag: "No uploads",
+      icon: (
+        <svg className="w-8 h-8 text-indigo-600 dark:text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+        </svg>
+      ),
+    },
+    {
+      title: "Video Converter",
+      description: "Convert videos to MP4, MOV, MKV, AVI, MP3, or GIF—all locally. Extract audio or create animated GIFs in seconds.",
+      href: "/convert-video",
+      color: "emerald",
+      tag: "6 formats",
+      icon: (
+        <svg className="w-8 h-8 text-emerald-600 dark:text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+      ),
+    },
+    {
+      title: "Video Trimmer",
+      description: "Cut precise segments from your videos with stream‑copy (no re‑encode). Keep original quality, trim in seconds.",
+      href: "/trim-video",
+      color: "amber",
+      tag: "Stream‑copy",
+      icon: (
+        <svg className="w-8 h-8 text-amber-600 dark:text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243zm0 0l2.879 2.879" />
+        </svg>
+      ),
+    },
+    {
+      title: "Video Cropper",
+      description: "Crop videos to any aspect ratio (1:1, 9:16, 16:9) visually. Select the region you want to keep and export.",
+      href: "/crop-video",
+      color: "purple",
+      tag: "Visual crop",
+      icon: (
+        <svg className="w-8 h-8 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 6l12 12M6 18L18 6M6 6h12v12" />
+        </svg>
+      ),
+    },
+    {
+      title: "Rotate & Flip",
+      description: "Rotate videos 90°, 180°, or flip horizontally/vertically. Fix sideways videos instantly. All processing happens locally.",
+      href: "/rotate-video",
+      color: "cyan",
+      tag: "Orientation",
+      icon: (
+        <svg className="w-8 h-8 text-cyan-600 dark:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+      ),
+    },
+    {
+      title: "Remove Audio",
+      description: "Strip the audio track from your videos completely, leaving only the video. No quality loss, processed locally.",
+      href: "/remove-audio",
+      color: "rose",
+      tag: "Mute video",
+      icon: (
+        <svg className="w-8 h-8 text-rose-600 dark:text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.25 9.75 19.5 12m0 0 2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6 4.72-4.72a.75.75 0 0 1 1.28.531V19.189a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.506-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75z" />
+        </svg>
+      ),
+    },
+    {
+      title: "Volume Booster",
+      description: "Increase or decrease the audio volume of your videos. Choose a multiplier from 50% to 400%. Video stream stays untouched.",
+      href: "/increase-volume",
+      color: "blue",
+      tag: "Volume control",
+      icon: (
+        <svg className="w-8 h-8 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318.664-2.66 1.905A9.76 9.76 0 0 0 1.5 12c0 .898.121 1.768.35 2.595.341 1.24 1.518 1.905 2.659 1.905h1.93l4.5 4.5c.945.945 2.561.276 2.561-1.06V4.06zM18.584 5.106a.75.75 0 0 1 1.06 0c3.808 3.807 3.808 9.98 0 13.788a.75.75 0 0 1-1.06-1.06 8.25 8.25 0 0 0 0-11.668.75.75 0 0 1 0-1.06z" />
+        </svg>
+      ),
+    },
+    {
+      title: "Video to GIF",
+      description: "Convert any video to a high‑quality animated GIF with adjustable FPS and size. Everything runs locally, no uploads.",
+      href: "/video-to-gif",
+      color: "pink",
+      tag: "Animated",
+      icon: (
+        <svg className="w-8 h-8 text-pink-600 dark:text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+      ),
+    },
+    {
+      title: "Screen Recorder",
+      description: "Record your screen, window, or tab directly in your browser. No extensions, no watermarks, unlimited recording time.",
+      href: "/screen-recorder",
+      color: "red",
+      tag: "No uploads",
+      icon: (
+        <svg className="w-8 h-8 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+        </svg>
+      ),
+    },
+    {
+      title: "Video Speed",
+      description: "Change playback speed of your videos (0.5x, 1.5x, 2x, etc). Slow down or speed up without quality loss.",
+      href: "/video-speed",
+      color: "green",
+      tag: "Speed control",
+      icon: (
+        <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      ),
+    },
+    {
+      title: "Video Merger",
+      description: "Combine multiple videos into one seamless file. Reorder clips and merge with stream‑copy for fastest processing.",
+      href: "/merge-video",
+      color: "violet",
+      tag: "Merge",
+      icon: (
+        <svg className="w-8 h-8 text-violet-600 dark:text-violet-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+        </svg>
+      ),
+    },
+    {
+      title: "Add Audio",
+      description: "Replace or add a new audio track to your video. Choose from uploaded audio files, keep original video quality.",
+      href: "/add-audio",
+      color: "orange",
+      tag: "Audio muxing",
+      icon: (
+        <svg className="w-8 h-8 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+        </svg>
+      ),
+    },
+    {
+      title: "Reverse Video",
+      description: "Play your video backwards. Reverse both video and audio streams, or keep audio normal. All processing local.",
+      href: "/reverse-video",
+      color: "yellow",
+      tag: "Reverse",
+      icon: (
+        <svg className="w-8 h-8 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12h12" />
+        </svg>
+      ),
+    },
+    {
+      title: "Loop Video",
+      description: "Repeat your video multiple times seamlessly. Choose loop count, uses stream‑copy for lightning‑fast processing.",
+      href: "/loop-video",
+      color: "teal",
+      tag: "Loop",
+      icon: (
+        <svg className="w-8 h-8 text-teal-600 dark:text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
+      ),
+    },
+    {
+      title: "Slideshow Maker",
+      description: "Turn multiple images into a video slideshow. Set duration per slide, reorder images, create professional slideshows.",
+      href: "/slideshow",
+      color: "sky",
+      tag: "Slideshow",
+      icon: (
+        <svg className="w-8 h-8 text-sky-600 dark:text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+      ),
+    },
+  ];
+
+  // Color mapping for dynamic class generation
+  const colorClasses = {
+    indigo: { from: 'indigo', bg: 'indigo', text: 'indigo' },
+    emerald: { from: 'emerald', bg: 'emerald', text: 'emerald' },
+    amber: { from: 'amber', bg: 'amber', text: 'amber' },
+    purple: { from: 'purple', bg: 'purple', text: 'purple' },
+    cyan: { from: 'cyan', bg: 'cyan', text: 'cyan' },
+    rose: { from: 'rose', bg: 'rose', text: 'rose' },
+    blue: { from: 'blue', bg: 'blue', text: 'blue' },
+    pink: { from: 'pink', bg: 'pink', text: 'pink' },
+    red: { from: 'red', bg: 'red', text: 'red' },
+    green: { from: 'green', bg: 'green', text: 'green' },
+    violet: { from: 'violet', bg: 'violet', text: 'violet' },
+    orange: { from: 'orange', bg: 'orange', text: 'orange' },
+    yellow: { from: 'yellow', bg: 'yellow', text: 'yellow' },
+    teal: { from: 'teal', bg: 'teal', text: 'teal' },
+    sky: { from: 'sky', bg: 'sky', text: 'sky' },
+  };
+
   return (
     <div className="bg-white dark:bg-gray-900">
       {/* Hero Section */}

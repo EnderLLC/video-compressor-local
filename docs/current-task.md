@@ -1,50 +1,58 @@
-# TASK-32: Loop Video Tool (Repeater)
+# TASK-33: Images to Video (Slideshow Maker)
 
 **Durum:** 🟢 Aktif
 **Öncelik:** 🎬 Video Editing Tools
 
 ## 🎯 HEDEF
-Kullanıcının yüklediği videoyu, seçilen sayı kadar arka arkaya ekleyip (Loop) uzatmak.
+Kullanıcının birden fazla resim yükleyip, bunları videoya dönüştürmesini sağlamak.
 
 ## 📋 ALT GÖREVLER
 - [x] **ADIM 1: Dokümantasyon**
-  - [x] `docs/project-status.md` dosyasını güncelle (Aktif Task: TASK-32).
-  - [x] `docs/current-task.md` dosyasını arşivle (`docs/archive/TASK-31-REVERSE.md`).
-  - [x] `docs/current-task.md` dosyasını temizle ve TASK-32 için hazırla.
-- [ ] **ADIM 2: Loop Logic (Hook)**
-  - [ ] `src/hooks/use-video-looper.ts` oluştur.
+  - [x] `docs/project-status.md` dosyasını güncelle (Aktif Task: TASK-33).
+  - [x] `docs/current-task.md` dosyasını arşivle (`docs/archive/TASK-32-LOOP.md`).
+  - [x] `docs/current-task.md` dosyasını temizle ve TASK-33 için hazırla.
+- [ ] **ADIM 2: KRİTİK BAKIM - Ana Sayfa Grid Refactor**
+  - [ ] `src/app/page.tsx` dosyasını aç.
+  - [ ] Şu anki hardcoded veya karışık grid yapısını temizle.
+  - [ ] **Data-Driven Yapı:** Sayfanın üst kısmında `TOOLS` adında bir array oluştur. Tüm araçların (Compress, Convert, Trim, Audio, Crop, Rotate, GIF, Speed, Recorder, Merger, Add Audio, Reverse, Loop, ve şimdi ekleyeceğimiz Slideshow) verilerini (title, description, icon, href, color) burada tanımla.
+  - [ ] Grid içinde bu array'i `map` ile dön.
+  - [ ] **Eksikleri Ekle:** Reverse ve Loop araçlarının kartlarının göründüğünden emin ol.
+- [ ] **ADIM 3: Slideshow Logic (Hook)**
+  - [ ] `src/hooks/use-slideshow.ts` oluştur.
+  - **Girdi:** `File[]` (Resimler).
+  - **Parametre:** `durationPerSlide` (Saniye, örn: 2, 3, 5).
   - **FFmpeg Mantığı:**
-    - Parametre: `loopCount` (Örn: 2, 3, 5, 10).
-    - Komut: `-stream_loop {loopCount - 1} -i input.mp4 -c copy output.mp4`
-    - *Not:* FFmpeg'de `stream_loop` kaç kere "ekleneceğini" belirtir. Yani videonun toplam 3 kere oynaması için loop değerinin 2 olması gerekir. (Logic: `param = userSelection - 1`).
-    - `-c copy` kullandığımız için işlem çok hızlı olmalı.
-- [ ] **ADIM 3: UI Bileşeni**
-  - [ ] `src/components/features/video-looper.tsx` oluştur.
+    - Resimleri belirli bir kare hızında (framerate) okuyarak videoya çevir.
+    - Komut (Basitleştirilmiş): `-framerate 1/{duration} -i image%d.jpg -c:v libx264 -r 30 -pix_fmt yuv420p output.mp4`
+    - *Not:* FFmpeg.wasm dosya sistemine resimleri `img001.jpg`, `img002.jpg` gibi sıralı yazman gerekecek. Hook içinde önce dosyaları sanal dosya sistemine yaz, sonra komutu çalıştır.
+- [ ] **ADIM 4: UI Bileşeni**
+  - [ ] `src/components/features/slideshow-maker.tsx` oluştur.
   - **Tasarım:**
-    - Dropzone.
-    - **Loop Ayarı:** "Repeat Times" -> [2x, 3x, 4x, 5x, 10x, Infinite(Gif? - Şimdilik sayısal kalsın)].
-    - Bilgi Notu: "Uses stream copy for lightning-fast processing."
-- [ ] **ADIM 4: Sayfa ve Entegrasyon**
-  - [ ] `src/app/loop-video/page.tsx` oluştur.
-  - **Metadata:** Title: "Loop Video Online - Repeat MP4 Automatically".
-  - **Global:** Navbar, Footer ve Ana Sayfa Grid'ine "Loop Video" linklerini ekle. (Bir önceki taskta atlanan Grid eklemesini burada telafi etmeyi unutma).
-  - **Reklam & Workspace:** Standart entegrasyon (`AD_SLOTS.tool`, `saveFile`).
-- [ ] **ADIM 5: Test**
+    - Multi-file Dropzone (Sadece resim).
+    - Resim Sıralama Listesi (Video Merger'daki gibi yukarı/aşağı taşıma).
+    - "Duration per Image" ayarı (Input veya Select).
+    - "Create Video" butonu.
+- [ ] **ADIM 5: Sayfa ve Entegrasyon**
+  - [ ] `src/app/slideshow/page.tsx` oluştur.
+  - **Metadata:** Title: "Images to Video Online - Create Slideshow from Photos".
+  - **Global:** Navbar ve Footer'a "Slideshow" linkini ekle.
+  - **Grid:** `src/app/page.tsx` içindeki yeni `TOOLS` array'ine Slideshow aracını ekle.
+- [ ] **Bitiş:**
   - [ ] `npm run dev` ile test et.
-  - [ ] 2 saniyelik bir video yükle, 5x seç.
-  - [ ] Çıkan videonun 10 saniye olduğunu ve kalite kaybı olmadığını doğrula.
+  - [ ] Ana sayfada TÜM araçların (Reverse, Loop, Slideshow dahil) düzgün sıralandığını gör.
+  - [ ] 3 resim yükle, videoya çevir ve oynat.
 
 ## ✅ TAMAMLANMA KRİTERLERİ
-- [ ] `use-video-looper.ts` hook'u oluşturuldu ve FFmpeg ile çalışıyor.
-- [ ] `video-looper.tsx` bileşeni oluşturuldu, loop count seçimi çalışıyor.
-- [ ] `loop-video/page.tsx` sayfası oluşturuldu, metadata ve ads entegrasyonu tamam.
-- [ ] Navbar, Footer ve Ana Sayfa Grid'inde "Loop Video" linki eklendi.
-- [ ] Test sonucu: Video başarıyla loop'landı, süre doğru, kalite kaybı yok.
+- [ ] `use-slideshow.ts` hook'u oluşturuldu ve FFmpeg ile çalışıyor.
+- [ ] `slideshow-maker.tsx` bileşeni oluşturuldu, image ordering ve duration seçimi çalışıyor.
+- [ ] `slideshow/page.tsx` sayfası oluşturuldu, metadata ve ads entegrasyonu tamam.
+- [ ] Navbar, Footer ve Ana Sayfa Grid'inde "Slideshow" linki eklendi.
+- [ ] Test sonucu: Başarıyla slideshow video oluşturuldu, süre doğru, kalite kaybı yok.
 
 ## 📂 İLGİLİ DOSYALAR
-- `src/hooks/use-video-looper.ts`
-- `src/components/features/video-looper.tsx`
-- `src/app/loop-video/page.tsx`
+- `src/hooks/use-slideshow.ts`
+- `src/components/features/slideshow-maker.tsx`
+- `src/app/slideshow/page.tsx`
 - `src/config/ads.ts`
 - `src/components/layout/navbar.tsx`
 - `src/components/layout/footer.tsx`

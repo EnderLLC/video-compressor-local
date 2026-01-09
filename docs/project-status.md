@@ -4,14 +4,14 @@
 
 ## Current Active Task
 
-**TASK‑32 – Loop Video Tool (Repeater)**
+**TASK‑33 – Images to Video (Slideshow Maker)**
 **Status:** 🟢 In Progress
 **Phase:** IMPLEMENTATION
 
-- Create video looper hook (`use‑video‑looper.ts`).
-- Build UI component with loop count selection.
-- Integrate loop‑video page.
-- Test with short video.
+- Create slideshow hook (`use‑slideshow.ts`).
+- Build UI component with image ordering and duration per slide.
+- Integrate slideshow page.
+- Test with multiple images.
 
 ## Completed Tasks
 
@@ -45,6 +45,7 @@
 | TASK‑29 | Video Merger (Joiner) | `use‑video‑merger` hook, multi‑file dropzone, reordering UI, merge video page. |
 | TASK‑30 | Add Audio to Video (Muxer) | `use‑audio‑muxer` hook, video/audio upload, replace audio without re‑encoding. |
 | TASK‑31 | Reverse Video Tool | `use‑video‑reverser` hook, mute audio option, reverse both video and audio streams. |
+| TASK‑32 | Loop Video Tool (Repeater) | `use‑video‑looper` hook, loop count selection, stream‑copy fast processing. |
 
 ## Pending / Future Tasks
 

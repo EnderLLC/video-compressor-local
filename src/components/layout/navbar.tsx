@@ -19,6 +19,7 @@ const navigation = [
   { name: "Add Audio", href: "/add-audio" },
   { name: "Reverse Video", href: "/reverse-video" },
   { name: "Loop Video", href: "/loop-video" },
+  { name: "Slideshow Maker", href: "/slideshow" },
   { name: "Screen Recorder", href: "/screen-recorder" },
   { name: "Blog", href: "/blog" },
   { name: "Privacy Policy", href: "/privacy" },

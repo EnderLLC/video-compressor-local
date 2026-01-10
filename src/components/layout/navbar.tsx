@@ -14,6 +14,7 @@ const navigation = [
   { name: "Remove Audio", href: "/remove-audio" },
   { name: "Volume Booster", href: "/increase-volume" },
   { name: "Audio Converter", href: "/audio-converter" },
+  { name: "Audio Joiner", href: "/audio-joiner" },
   { name: "Video to GIF", href: "/video-to-gif" },
   { name: "Video Speed", href: "/video-speed" },
   { name: "Video Merger", href: "/merge-video" },

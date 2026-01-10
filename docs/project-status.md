@@ -4,14 +4,14 @@
 
 ## Current Active Task
 
-**TASK‑37 – Video Splitter (Story Cutter)**
+**TASK‑38 – Audio Merger (MP3 Joiner)**
 **Status:** 🟢 In Progress
 **Phase:** IMPLEMENTATION
 
-- Create video splitter hook (`use‑video‑splitter.ts`).
-- Build UI component with dropzone and segment duration selection.
-- Integrate video splitter page.
-- Test splitting a video into equal‑length segments (e.g., 15‑second stories).
+- Create audio merger hook (`use‑audio‑merger.ts`).
+- Build UI component with dropzone and file reordering.
+- Integrate audio joiner page.
+- Test merging multiple audio files into a single file.
 
 ## Completed Tasks
 
@@ -50,6 +50,7 @@
 | TASK‑34 | Audio Converter & Extractor | Audio extraction from video and format conversion (MP3, WAV, AAC, M4A, OGG). |
 | TASK‑35 | Video Resizer (Aspect Ratio Changer) | Aspect ratio change with padding, background color selection, resizer UI. |
 | TASK‑36 | Video Thumbnail Generator (Frame Extractor) | Hook, UI component, and page integration for extracting frames from video. |
+| TASK‑37 | Video Splitter (Story Cutter) | Hook, UI component, and page integration for splitting video into equal‑length segments. |
 
 ## Pending / Future Tasks
 

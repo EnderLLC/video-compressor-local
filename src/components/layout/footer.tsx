@@ -79,6 +79,14 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href="/audio-joiner"
+                  className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                >
+                  Audio Joiner
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/video-to-gif"
                   className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                 >

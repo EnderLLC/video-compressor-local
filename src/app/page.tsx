@@ -220,7 +220,31 @@ export default function Home() {
         </svg>
       ),
     },
-  ];
+  {
+    title: "Video Resizer",
+    description: "Change video aspect ratio for Instagram, TikTok, YouTube (16:9, 9:16, 1:1, 4:5). Fill empty space with black or white background.",
+    href: "/resize-video",
+    color: "lime",
+    tag: "Aspect ratio",
+    icon: (
+      <svg className="w-8 h-8 text-lime-600 dark:text-lime-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h11M3 14h11m-11-4h11M3 18h11M3 6h18M3 6v12a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Thumbnail Generator",
+    description: "Extract high‑quality still frames (JPG/PNG) from any video at any timestamp. Works locally, no uploads.",
+    href: "/thumbnail-generator",
+    color: "teal",
+    tag: "Frame extractor",
+    icon: (
+      <svg className="w-8 h-8 text-teal-600 dark:text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+      </svg>
+    ),
+  },
+];
 
   // Color mapping for dynamic class generation
   const colorClasses = {
@@ -239,6 +263,7 @@ export default function Home() {
     yellow: { from: 'yellow', bg: 'yellow', text: 'yellow' },
     teal: { from: 'teal', bg: 'teal', text: 'teal' },
     sky: { from: 'sky', bg: 'sky', text: 'sky' },
+    lime: { from: 'lime', bg: 'lime', text: 'lime' },
   };
 
   return (

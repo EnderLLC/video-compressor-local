@@ -143,6 +143,22 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href="/resize-video"
+                  className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                >
+                  Resize Video
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/thumbnail-generator"
+                  className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                >
+                  Thumbnail Generator
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/blog"
                   className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                 >

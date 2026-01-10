@@ -22,6 +22,8 @@ const navigation = [
   { name: "Loop Video", href: "/loop-video" },
   { name: "Slideshow Maker", href: "/slideshow" },
   { name: "Screen Recorder", href: "/screen-recorder" },
+  { name: "Resize Video", href: "/resize-video" },
+  { name: "Thumbnail Generator", href: "/thumbnail-generator" },
   { name: "Blog", href: "/blog" },
   { name: "Privacy Policy", href: "/privacy" },
   { name: "Terms of Service", href: "/terms" },

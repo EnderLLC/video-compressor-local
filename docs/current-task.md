@@ -1,61 +1,57 @@
-# TASK-34: Audio Converter & Extractor
+# TASK-36: Video Thumbnail Generator (Frame Extractor)
 
 **Durum:** 🟢 Aktif
-**Öncelik:** 🎬 Audio Tools
+**Öncelik:** 🎬 Video Tools
 
 ## 🎯 HEDEF
-Kullanıcının video veya ses dosyalarından ses ayıklamasını (MP4 -> MP3) veya ses formatlarını dönüştürmesini (WAV -> MP3) sağlamak.
+Videonun içinden seçilen belirli bir kareyi yüksek kalitede resim (JPG/PNG) olarak kaydetmek.
 
 ## 📋 ALT GÖREVLER
-- [x] **ADIM 1: Dokümantasyon**
-  - [x] `docs/project-status.md` dosyasını güncelle (Aktif Task: TASK-34).
-  - [x] `docs/current-task.md` dosyasını arşivle (`docs/archive/TASK-33-SLIDESHOW.md`).
-  - [x] `docs/current-task.md` dosyasını temizle ve TASK-34 için hazırla.
-- [ ] **ADIM 2: Audio Logic (Hook)**
-  - [ ] `src/hooks/use-audio-converter.ts` oluştur.
-  - **Girdi:** Video veya Ses dosyası (`File`).
-  - **Parametre:** `targetFormat` (mp3, wav, aac, m4a, ogg).
+- [ ] **ADIM 1: Dokümantasyon**
+  - [ ] `docs/project-status.md` dosyasını güncelle (Aktif Task: TASK-36).
+  - [ ] `docs/current-task.md` dosyasını arşivle (`docs/archive/TASK-35-RESIZER.md`).
+  - [ ] `docs/current-task.md` dosyasını temizle ve TASK-36 için hazırla.
+- [ ] **ADIM 2: Thumbnail Logic (Hook)**
+  - [ ] `src/hooks/use-thumbnail-generator.ts` oluştur.
+  - **Fonksiyon:** `generateThumbnail(file, timestamp, format)`
   - **FFmpeg Mantığı:**
-    - Komut: `-i input.file -vn -acodec {codec} output.{format}`
-    - **Codec Eşleşmeleri:**
-      - mp3 -> `libmp3lame` (Standart) veya `mp3`
-      - aac -> `aac`
-      - wav -> `pcm_s16le`
-      - ogg -> `libvorbis`
-      - m4a -> `aac`
-    - *İpucu:* `-vn` parametresi "Video None" demektir, videoyu atar ve sadece sesi işler.
-  - **Çıktı:** Dönüştürülmüş ses dosyası.
+    - Parametre: `timestamp` (Saniye cinsinden, örn: 12.5).
+    - Komut: `-ss {timestamp} -i input.mp4 -frames:v 1 -q:v 2 output.{format}`
+    - *Not:* `-ss` parametresi inputtan ÖNCE gelmeli ki hızlı seek (arama) yapsın. `-q:v 2` en yüksek JPG kalitesidir.
 - [ ] **ADIM 3: UI Bileşeni**
-  - [ ] `src/components/features/audio-converter.tsx` oluştur.
+  - [ ] `src/components/features/thumbnail-generator.tsx` oluştur.
   - **Tasarım:**
-    - Dropzone (Video VE Ses dosyalarını kabul etmeli: `accept: {'audio/*': [], 'video/*': []}`).
-    - **Format Seçimi:** Güzel bir Select veya Radio Group (MP3, WAV, AAC, M4A, OGG). Varsayılan: MP3.
-    - "Convert" butonu.
+    - **Video Player:** Yüklenen videoyu göster. Altında standart kontroller olsun.
+    - **Slider (Scrubber):** Videonun içinde hassas gezinmek için bir Range Slider.
+    - **Kontroller:**
+      - "Current Time": Şu anki saniyeyi göster (Örn: 00:14.5).
+      - "Format": JPG / PNG seçimi.
+      - "Capture Frame" butonu.
+    - **Sonuç:** Yakalanan kareyi ekranda göster ve "Download" butonu koy.
 - [ ] **ADIM 4: Sayfa ve Entegrasyon**
-  - [ ] `src/app/audio-converter/page.tsx` oluştur.
-  - **Metadata:** Title: "Audio Converter Online - Extract MP3 from Video".
-  - **Global:** Navbar ve Footer'a "Audio Converter" linkini ekle.
-  - **Grid (Kolay Yöntem):** `src/app/page.tsx` içindeki `TOOLS` array'ine yeni aracı ekle:
-    - Title: "Audio Converter"
-    - Desc: "Extract audio from video or convert sound files."
-    - Icon: `Music` (Lucide-react'tan).
-    - Color: "bg-pink-500" (veya uygun bir renk).
+  - [ ] `src/app/thumbnail-generator/page.tsx` oluştur.
+  - **Metadata:** Title: "Video Thumbnail Generator - Extract Frames from Video".
+  - **Global:** Navbar ve Footer'a "Thumbnail Generator" linkini ekle.
+  - **Grid:** `src/app/page.tsx` içindeki `TOOLS` array'ine "Thumbnail Generator" ekle (Icon: `Image` veya `Camera`).
+  - **Workspace:** Oluşan resmi `saveFile` ile kaydet (Type: 'image').
 - [ ] **ADIM 5: Test**
   - [ ] `npm run dev` ile test et.
-  - [ ] Bir MP4 video yükle, MP3 seç ve dönüştür.
-  - [ ] İnen dosyanın sadece ses çaldığını teyit et.
+  - [ ] Bir video yükle.
+  - [ ] 5. saniyeye gel.
+  - [ ] "Capture" de.
+  - [ ] İnen resmin, videodaki o an ile birebir aynı ve net olduğunu doğrula.
 
 ## ✅ TAMAMLANMA KRİTERLERİ
-- [ ] `use-audio-converter.ts` hook'u oluşturuldu ve FFmpeg ile çalışıyor.
-- [ ] `audio-converter.tsx` bileşeni oluşturuldu, format seçimi ve dropzone doğru çalışıyor.
-- [ ] `audio-converter/page.tsx` sayfası oluşturuldu, metadata ve ads entegrasyonu tamam.
-- [ ] Navbar, Footer ve Ana Sayfa Grid'inde "Audio Converter" linki eklendi.
-- [ ] Test sonucu: Video'dan MP3 başarıyla ayıklandı, sadece ses içeriyor.
+- [ ] `use-thumbnail-generator.ts` hook'u oluşturuldu ve FFmpeg ile çalışıyor.
+- [ ] `thumbnail-generator.tsx` bileşeni oluşturuldu, video player, scrubber ve capture kontrolleri doğru çalışıyor.
+- [ ] `thumbnail-generator/page.tsx` sayfası oluşturuldu, metadata ve ads entegrasyonu tamam.
+- [ ] Navbar, Footer ve Ana Sayfa Grid'inde "Thumbnail Generator" linki eklendi.
+- [ ] Test sonucu: Video karesi başarıyla yakalandı, yüksek kalitede resim olarak kaydedildi.
 
 ## 📂 İLGİLİ DOSYALAR
-- `src/hooks/use-audio-converter.ts`
-- `src/components/features/audio-converter.tsx`
-- `src/app/audio-converter/page.tsx`
+- `src/hooks/use-thumbnail-generator.ts`
+- `src/components/features/thumbnail-generator.tsx`
+- `src/app/thumbnail-generator/page.tsx`
 - `src/config/ads.ts`
 - `src/components/layout/navbar.tsx`
 - `src/components/layout/footer.tsx`

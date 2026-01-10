@@ -4,14 +4,14 @@
 
 ## Current Active Task
 
-**TASK‑34 – Audio Converter & Extractor**
+**TASK‑36 – Video Thumbnail Generator (Frame Extractor)**
 **Status:** 🟢 In Progress
 **Phase:** IMPLEMENTATION
 
-- Create audio converter hook (`use‑audio‑converter.ts`).
-- Build UI component with format selection and dropzone.
-- Integrate audio converter page.
-- Test with video and audio files.
+- Create thumbnail generator hook (`use‑thumbnail‑generator.ts`).
+- Build UI component with video player, scrubber, and capture controls.
+- Integrate thumbnail generator page.
+- Test with frame extraction at precise timestamp.
 
 ## Completed Tasks
 
@@ -47,6 +47,8 @@
 | TASK‑31 | Reverse Video Tool | `use‑video‑reverser` hook, mute audio option, reverse both video and audio streams. |
 | TASK‑32 | Loop Video Tool (Repeater) | `use‑video‑looper` hook, loop count selection, stream‑copy fast processing. |
 | TASK‑33 | Images to Video (Slideshow Maker) | `use‑slideshow` hook, image ordering, duration per slide, slideshow page. |
+| TASK‑34 | Audio Converter & Extractor | Audio extraction from video and format conversion (MP3, WAV, AAC, M4A, OGG). |
+| TASK‑35 | Video Resizer (Aspect Ratio Changer) | Aspect ratio change with padding, background color selection, resizer UI. |
 
 ## Pending / Future Tasks
 

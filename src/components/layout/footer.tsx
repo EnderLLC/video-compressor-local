@@ -151,6 +151,14 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href="/webcam-recorder"
+                  className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                >
+                  Webcam Recorder
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/resize-video"
                   className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                 >
@@ -171,6 +179,14 @@ export default function Footer() {
                   className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
                 >
                   Video Splitter
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/add-watermark"
+                  className="text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white"
+                >
+                  Add Watermark
                 </Link>
               </li>
               <li>

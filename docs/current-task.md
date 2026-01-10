@@ -1,53 +1,57 @@
-# TASK-38: Audio Merger (MP3 Joiner)
+# TASK-40: Webcam Recorder
 
 **Durum:** 🟢 Aktif
-**Öncelik:** 🎵 Audio Tools
+**Öncelik:** 🎥 Kullanıcı Etkileşimi
 
 ## 🎯 HEDEF
-Birden fazla ses dosyasını (MP3, WAV, vb.) arka arkaya ekleyip tek bir dosya haline getirmek.
+Kullanıcının kamerasını kullanarak video kaydı almasını sağlamak.
 
 ## 📋 ALT GÖREVLER
-- [ ] **ADIM 1: Dokümantasyon**
-  - [ ] `docs/project-status.md` dosyasını güncelle (Aktif Task: TASK-38).
-  - [ ] `docs/current-task.md` dosyasını arşivle (`docs/archive/TASK-37-SPLITTER.md`).
-  - [ ] `docs/current-task.md` dosyasını temizle ve TASK-38 için hazırla.
-- [ ] **ADIM 2: Audio Merger Logic (Hook)**
-  - [ ] `src/hooks/use-audio-merger.ts` oluştur.
-  - **Girdi:** `File[]` (Ses dosyaları).
-  - **FFmpeg Mantığı (Concat Filter):**
-    - Dosyaları `input0.mp3`, `input1.mp3` diye sanal diske yaz.
-    - Komut oluştur: `-i input0.mp3 -i input1.mp3 ...`
-    - Filter Complex: `[0:a][1:a]...concat=n={sayı}:v=0:a=1[out]`
-    - Map: `-map "[out]"`
-    - *Not:* Video Merger'daki gibi "scale" (boyutlandırma) derdi olmadığı için bu işlem çok daha basittir. Sadece ses (audio) streamlerini birleştiriyoruz.
-- [ ] **ADIM 3: UI Bileşeni**
-  - [ ] `src/components/features/audio-merger.tsx` oluştur.
+- [x] **ADIM 1: Dokümantasyon**
+  - [x] `docs/project-status.md` dosyasını güncelle (Aktif Task: TASK-40).
+  - [x] `docs/current-task.md` dosyasını arşivle (`docs/archive/TASK-39-WATERMARK.md`).
+  - [x] `docs/current-task.md` dosyasını temizle ve TASK-40 için hazırla.
+- [x] **ADIM 2: Webcam Logic (Hook)**
+  - [x] `src/hooks/use-webcam-recorder.ts` oluştur.
+  - **Mantık:** `use-screen-recorder.ts` kancasına çok benzer olacak.
+  - **API:** `navigator.mediaDevices.getUserMedia({ video: true, audio: true })`.
+  - **Fonksiyonlar:**
+    - `startCamera()`: Sadece önizlemeyi açar (Kayıt başlamaz).
+    - `startRecording()`: Kaydı başlatır.
+    - `stopRecording()`: Kaydı bitirir.
+    - `stopCamera()`: Kamera ışığını kapatır (Stream'i durdurur).
+- [x] **ADIM 3: UI Bileşeni**
+  - [x] `src/components/features/webcam-recorder.tsx` oluştur.
   - **Tasarım:**
-    - `video-merger.tsx` bileşenini kopyalayıp uyarlayabilirsin.
-    - **Dropzone:** Sadece ses dosyalarını kabul etsin (`audio/*`).
-    - **Sıralama Listesi:** Kullanıcı Intro'yu başa, Outro'yu sona alabilmeli (Yukarı/Aşağı okları).
-    - "Merge Audio" butonu.
-- [ ] **ADIM 4: Sayfa ve Entegrasyon**
-  - [ ] `src/app/audio-joiner/page.tsx` oluştur (URL: `audio-joiner` daha SEO dostudur).
-  - **Metadata:** Title: "Audio Joiner Online - Merge MP3 Files for Free".
-  - **Global:** Navbar ve Footer'a "Audio Joiner" linkini ekle.
-  - **Grid:** `src/app/page.tsx` içindeki `TOOLS` array'ine "Audio Joiner" ekle (Icon: `Music` veya `ListMusic`).
-- [ ] **ADIM 5: Test ve Doğrulama**
-  - [ ] `npm run dev` ile test et.
-  - [ ] 2 farklı MP3 yükle.
-  - [ ] Birleştir ve inen dosyayı dinle (İkisi arka arkaya çalmalı).
+    - **Video Alanı:** Canlı kamera görüntüsü (Mirror effect yani aynalanmış olması doğaldır: `transform: scaleX(-1)` css'i ile yapılabilir).
+    - **Kontroller:**
+      - "Turn On Camera" butonu (Başlangıçta).
+      - "Record" (Kırmızı yuvarlak buton).
+      - "Stop" (Kare buton).
+    - **Sonuç:** Kayıt bitince videoyu oynat ve "Download WebM" butonu göster.
+- [x] **ADIM 4: Sayfa ve Entegrasyon**
+  - [x] `src/app/webcam-recorder/page.tsx` oluştur.
+  - **Metadata:** Title: "Online Webcam Recorder - Record Video from Camera Free".
+  - **Global:** Navbar ve Footer'a "Webcam Recorder" linkini ekle.
+  - **Grid:** `src/app/page.tsx` içindeki `TOOLS` array'ine "Webcam Recorder" ekle (Icon: `Video` veya `Camera`).
+  - **Workspace:** Kaydı `saveFile` ile 'webcam-recording' tipiyle kaydet.
+- [x] **ADIM 5: Test ve Doğrulama**
+  - [x] `npm run dev` ile test et.
+  - [x] Kamerayı aç (Tarayıcı izin isteyecek).
+  - [x] Kendine el salla ve kaydet.
+  - [x] İndirip izle.
 
 ## ✅ TAMAMLANMA KRİTERLERİ
-- [ ] `use-audio-merger.ts` hook'u oluşturuldu ve FFmpeg ile çalışıyor.
-- [ ] `audio-merger.tsx` bileşeni oluşturuldu, dropzone, sıralama ve merge butonu doğru çalışıyor.
-- [ ] `audio-joiner/page.tsx` sayfası oluşturuldu, metadata ve ads entegrasyonu tamam.
-- [ ] Navbar, Footer ve Ana Sayfa Grid'inde "Audio Joiner" linki eklendi.
-- [ ] Test sonucu: Ses dosyaları başarıyla birleştirildi, birleşik dosya indirilebildi.
+- [x] `use-webcam-recorder.ts` hook'u oluşturuldu ve kamera erişimi, kayıt işlevleri çalışıyor.
+- [x] `webcam-recorder.tsx` bileşeni oluşturuldu, kamera önizlemesi, kayıt kontrolleri ve indirme butonu doğru çalışıyor.
+- [x] `webcam-recorder/page.tsx` sayfası oluşturuldu, metadata ve ads entegrasyonu tamam.
+- [x] Navbar, Footer ve Ana Sayfa Grid'inde "Webcam Recorder" linki eklendi.
+- [x] Test sonucu: Kameradan kayıt alınabiliyor, WebM dosyası indirilebiliyor.
 
 ## 📂 İLGİLİ DOSYALAR
-- `src/hooks/use-audio-merger.ts`
-- `src/components/features/audio-merger.tsx`
-- `src/app/audio-joiner/page.tsx`
+- `src/hooks/use-webcam-recorder.ts`
+- `src/components/features/webcam-recorder.tsx`
+- `src/app/webcam-recorder/page.tsx`
 - `src/config/ads.ts`
 - `src/components/layout/navbar.tsx`
 - `src/components/layout/footer.tsx`

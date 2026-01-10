@@ -4,14 +4,14 @@
 
 ## Current Active Task
 
-**TASK‑38 – Audio Merger (MP3 Joiner)**
+**TASK‑40 – Webcam Recorder**
 **Status:** 🟢 In Progress
 **Phase:** IMPLEMENTATION
 
-- Create audio merger hook (`use‑audio‑merger.ts`).
-- Build UI component with dropzone and file reordering.
-- Integrate audio joiner page.
-- Test merging multiple audio files into a single file.
+- Create webcam recording hook (`use‑webcam‑recorder.ts`).
+- Build UI component with camera preview and recording controls.
+- Integrate webcam recorder page.
+- Test recording from camera and downloading WebM file.
 
 ## Completed Tasks
 
@@ -51,6 +51,7 @@
 | TASK‑35 | Video Resizer (Aspect Ratio Changer) | Aspect ratio change with padding, background color selection, resizer UI. |
 | TASK‑36 | Video Thumbnail Generator (Frame Extractor) | Hook, UI component, and page integration for extracting frames from video. |
 | TASK‑37 | Video Splitter (Story Cutter) | Hook, UI component, and page integration for splitting video into equal‑length segments. |
+| TASK‑39 | Watermark (Logo Overlay) | Hook, UI component, and page integration for adding logo overlay to video with positioning. |
 
 ## Pending / Future Tasks
 

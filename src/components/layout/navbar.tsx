@@ -24,6 +24,7 @@ const navigation = [
   { name: "Screen Recorder", href: "/screen-recorder" },
   { name: "Resize Video", href: "/resize-video" },
   { name: "Thumbnail Generator", href: "/thumbnail-generator" },
+  { name: "Video Splitter", href: "/video-splitter" },
   { name: "Blog", href: "/blog" },
   { name: "Privacy Policy", href: "/privacy" },
   { name: "Terms of Service", href: "/terms" },

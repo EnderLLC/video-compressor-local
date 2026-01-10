@@ -1,57 +1,53 @@
-# TASK-36: Video Thumbnail Generator (Frame Extractor)
+# TASK-37: Video Splitter (Story Cutter)
 
 **Durum:** 🟢 Aktif
 **Öncelik:** 🎬 Video Tools
 
 ## 🎯 HEDEF
-Videonun içinden seçilen belirli bir kareyi yüksek kalitede resim (JPG/PNG) olarak kaydetmek.
+Uzun bir videoyu otomatik olarak eşit parçalara bölmek (Örn: 15'er saniyelik Story parçaları).
 
 ## 📋 ALT GÖREVLER
 - [ ] **ADIM 1: Dokümantasyon**
-  - [ ] `docs/project-status.md` dosyasını güncelle (Aktif Task: TASK-36).
-  - [ ] `docs/current-task.md` dosyasını arşivle (`docs/archive/TASK-35-RESIZER.md`).
-  - [ ] `docs/current-task.md` dosyasını temizle ve TASK-36 için hazırla.
-- [ ] **ADIM 2: Thumbnail Logic (Hook)**
-  - [ ] `src/hooks/use-thumbnail-generator.ts` oluştur.
-  - **Fonksiyon:** `generateThumbnail(file, timestamp, format)`
+  - [ ] `docs/project-status.md` dosyasını güncelle (Aktif Task: TASK-37).
+  - [ ] `docs/current-task.md` dosyasını arşivle (`docs/archive/TASK-36-THUMBNAIL.md`).
+  - [ ] `docs/current-task.md` dosyasını temizle ve TASK-37 için hazırla.
+- [ ] **ADIM 2: Splitter Logic (Hook)**
+  - [ ] `src/hooks/use-video-splitter.ts` oluştur.
+  - **Parametre:** `segmentTime` (saniye cinsinden, örn: 15, 30, 60).
   - **FFmpeg Mantığı:**
-    - Parametre: `timestamp` (Saniye cinsinden, örn: 12.5).
-    - Komut: `-ss {timestamp} -i input.mp4 -frames:v 1 -q:v 2 output.{format}`
-    - *Not:* `-ss` parametresi inputtan ÖNCE gelmeli ki hızlı seek (arama) yapsın. `-q:v 2` en yüksek JPG kalitesidir.
+    - Komut: `-i input.mp4 -c copy -map 0 -segment_time {segmentTime} -f segment -reset_timestamps 1 output%03d.mp4`
+    - *Açıklama:* `-c copy` (hızlı kesim), `-f segment` (bölme modu), `output%03d.mp4` (output001.mp4, output002.mp4 diye isimlendir).
+    - **Kritik Nokta:** FFmpeg WASM çalıştığında birden fazla dosya üretecek. Komut bittikten sonra sanal dosya sistemini (`FS.readdir('.')`) tarayıp `output` ile başlayan dosyaları bulmalı ve bunları `Blob[]` listesi olarak döndürmelisin.
 - [ ] **ADIM 3: UI Bileşeni**
-  - [ ] `src/components/features/thumbnail-generator.tsx` oluştur.
+  - [ ] `src/components/features/video-splitter.tsx` oluştur.
   - **Tasarım:**
-    - **Video Player:** Yüklenen videoyu göster. Altında standart kontroller olsun.
-    - **Slider (Scrubber):** Videonun içinde hassas gezinmek için bir Range Slider.
-    - **Kontroller:**
-      - "Current Time": Şu anki saniyeyi göster (Örn: 00:14.5).
-      - "Format": JPG / PNG seçimi.
-      - "Capture Frame" butonu.
-    - **Sonuç:** Yakalanan kareyi ekranda göster ve "Download" butonu koy.
+    - Dropzone.
+    - **Süre Seçimi:** Butonlar (Instagram Story - 15s, WhatsApp Status - 30s, Shorts/TikTok - 60s, Custom).
+    - "Split Video" butonu.
+    - **Sonuç Ekranı:** Oluşan parçaların listesi. Her parçanın yanında "Download Part 1", "Download Part 2" butonları.
+    - (Opsiyonel ama iyi olur): "Download All (ZIP)" butonu şimdilik zor olabilir (JSZip gerekir), o yüzden "Hepsini Tek Tek İndir" listesi yeterli.
 - [ ] **ADIM 4: Sayfa ve Entegrasyon**
-  - [ ] `src/app/thumbnail-generator/page.tsx` oluştur.
-  - **Metadata:** Title: "Video Thumbnail Generator - Extract Frames from Video".
-  - **Global:** Navbar ve Footer'a "Thumbnail Generator" linkini ekle.
-  - **Grid:** `src/app/page.tsx` içindeki `TOOLS` array'ine "Thumbnail Generator" ekle (Icon: `Image` veya `Camera`).
-  - **Workspace:** Oluşan resmi `saveFile` ile kaydet (Type: 'image').
-- [ ] **ADIM 5: Test**
+  - [ ] `src/app/video-splitter/page.tsx` oluştur.
+  - **Metadata:** Title: "Video Splitter Online - Cut Video into Parts for Stories".
+  - **Global:** Navbar ve Footer'a "Video Splitter" linkini ekle.
+  - **Grid:** `src/app/page.tsx` içindeki `TOOLS` array'ine "Video Splitter" ekle (Icon: `Scissors` veya `SquareSplitVertical`).
+  - **Workspace:** Parçaları kaydetmek Workspace'i şişirebilir, şimdilik sadece UI'da gösterip indirtelim. (Veya sadece ilk parçayı kaydet).
+- [ ] **ADIM 5: Test ve Doğrulama**
   - [ ] `npm run dev` ile test et.
-  - [ ] Bir video yükle.
-  - [ ] 5. saniyeye gel.
-  - [ ] "Capture" de.
-  - [ ] İnen resmin, videodaki o an ile birebir aynı ve net olduğunu doğrula.
+  - [ ] 1 dakikalık bir video yükle, "30s" seç.
+  - [ ] Çıktı olarak 2 tane dosya oluştuğunu ve indirilebildiğini doğrula.
 
 ## ✅ TAMAMLANMA KRİTERLERİ
-- [ ] `use-thumbnail-generator.ts` hook'u oluşturuldu ve FFmpeg ile çalışıyor.
-- [ ] `thumbnail-generator.tsx` bileşeni oluşturuldu, video player, scrubber ve capture kontrolleri doğru çalışıyor.
-- [ ] `thumbnail-generator/page.tsx` sayfası oluşturuldu, metadata ve ads entegrasyonu tamam.
-- [ ] Navbar, Footer ve Ana Sayfa Grid'inde "Thumbnail Generator" linki eklendi.
-- [ ] Test sonucu: Video karesi başarıyla yakalandı, yüksek kalitede resim olarak kaydedildi.
+- [ ] `use-video-splitter.ts` hook'u oluşturuldu ve FFmpeg ile çalışıyor.
+- [ ] `video-splitter.tsx` bileşeni oluşturuldu, dropzone, süre seçimi ve split butonu doğru çalışıyor.
+- [ ] `video-splitter/page.tsx` sayfası oluşturuldu, metadata ve ads entegrasyonu tamam.
+- [ ] Navbar, Footer ve Ana Sayfa Grid'inde "Video Splitter" linki eklendi.
+- [ ] Test sonucu: Video başarıyla parçalara ayrıldı, her parça indirilebildi.
 
 ## 📂 İLGİLİ DOSYALAR
-- `src/hooks/use-thumbnail-generator.ts`
-- `src/components/features/thumbnail-generator.tsx`
-- `src/app/thumbnail-generator/page.tsx`
+- `src/hooks/use-video-splitter.ts`
+- `src/components/features/video-splitter.tsx`
+- `src/app/video-splitter/page.tsx`
 - `src/config/ads.ts`
 - `src/components/layout/navbar.tsx`
 - `src/components/layout/footer.tsx`

@@ -244,6 +244,18 @@ export default function Home() {
       </svg>
     ),
   },
+  {
+    title: "Video Splitter",
+    description: "Split long videos into equal‑length segments (15s, 30s, 60s) for Instagram Stories, WhatsApp Status, TikTok Shorts. Works locally, no uploads.",
+    href: "/video-splitter",
+    color: "sky",
+    tag: "Story cutter",
+    icon: (
+      <svg className="w-8 h-8 text-sky-600 dark:text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243zm0 0l2.879 2.879" />
+      </svg>
+    ),
+  },
 ];
 
   // Color mapping for dynamic class generation

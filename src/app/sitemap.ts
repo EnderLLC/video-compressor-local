@@ -1,12 +1,23 @@
 import { MetadataRoute } from 'next';
+import { getSortedPostsData } from '@/lib/blog';
 import { getAllSlugs } from '@/config/conversions';
-import { getAllPosts } from '@/lib/blog-utils';
 
 const baseUrl = 'https://www.local-media-tools.com';
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   // Static pages
-  const staticRoutes = ['', '/privacy', '/terms', '/compress-video', '/convert-video'].map((route) => ({
+  const staticRoutes = [
+    '',
+    '/privacy',
+    '/terms',
+    '/compress-video',
+    '/convert-video',
+    '/adjust-video',
+    '/blog',
+    '/settings'
+  ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
     changeFrequency: route === '' ? 'weekly' as const : 'monthly' as const,
@@ -23,7 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // Blog posts
-  const blogPosts = getAllPosts();
+  const blogPosts = getSortedPostsData();
   const blogRoutes = blogPosts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: new Date(post.date),

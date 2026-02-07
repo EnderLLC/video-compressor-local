@@ -170,7 +170,7 @@ export default function WebcamRecorder() {
                     <span className="text-xl font-bold text-red-700">Recording...</span>
                   </div>
                   <div className="text-3xl font-mono font-bold text-red-800">
-                    {formatTime(recordingTime)}
+                    {formatTime(recordingTime)} <span className="text-sm font-normal text-red-600 opacity-70">/ 30:00</span>
                   </div>
                 </div>
                 <p className="mt-4 text-red-700">

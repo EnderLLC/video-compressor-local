@@ -2,6 +2,8 @@ import { MetadataRoute } from 'next';
 
 const baseUrl = 'https://www.local-media-tools.com';
 
+export const dynamic = "force-static";
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {

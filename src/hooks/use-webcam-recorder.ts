@@ -11,10 +11,13 @@ interface UseWebcamRecorderReturn {
   error: string | null;
   startCamera: () => Promise<void>;
   stopCamera: () => void;
-  startRecording: () => Promise<void>;
+  startRecording: (options?: { maxTime?: number; maxSize?: number }) => Promise<void>;
   stopRecording: () => void;
   resetRecording: () => void;
 }
+
+const DEFAULT_MAX_TIME = 30 * 60; // 30 minutes
+const DEFAULT_MAX_SIZE = 1024 * 1024 * 1024; // 1 GB
 
 export function useWebcamRecorder(): UseWebcamRecorderReturn {
   const [cameraActive, setCameraActive] = useState(false);
@@ -28,6 +31,8 @@ export function useWebcamRecorder(): UseWebcamRecorderReturn {
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const currentSizeRef = useRef<number>(0);
+  const limitsRef = useRef({ maxTime: DEFAULT_MAX_TIME, maxSize: DEFAULT_MAX_SIZE });
 
   // Clean up on unmount
   useEffect(() => {
@@ -70,9 +75,27 @@ export function useWebcamRecorder(): UseWebcamRecorderReturn {
     }
   }, [isRecording]);
 
-  const startRecording = useCallback(async () => {
+  const stopRecording = useCallback(() => {
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state !== "inactive") {
+      mediaRecorderRef.current.stop();
+    }
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+    setIsRecording(false);
+  }, []); // Remove isRecording dependency to avoid stale closure issues if called from timer
+
+  const startRecording = useCallback(async (options?: { maxTime?: number; maxSize?: number }) => {
     try {
       setError(null);
+      
+      // Update limits
+      limitsRef.current = {
+        maxTime: options?.maxTime || DEFAULT_MAX_TIME,
+        maxSize: options?.maxSize || DEFAULT_MAX_SIZE
+      };
+
       // Ensure camera is active
       if (!mediaStreamRef.current) {
         await startCamera();
@@ -82,13 +105,23 @@ export function useWebcamRecorder(): UseWebcamRecorderReturn {
         throw new Error("Camera stream not available");
       }
 
-      const recorder = new MediaRecorder(stream);
+      const recorder = new MediaRecorder(stream, {
+        mimeType: 'video/webm;codecs=vp8,opus'
+      });
       mediaRecorderRef.current = recorder;
       chunksRef.current = [];
+      currentSizeRef.current = 0;
 
       recorder.ondataavailable = (event) => {
         if (event.data.size > 0) {
           chunksRef.current.push(event.data);
+          currentSizeRef.current += event.data.size;
+
+          // Check size limit
+          if (currentSizeRef.current >= limitsRef.current.maxSize) {
+            stopRecording();
+            setError("Maximum recording size limit reached (1GB). Recording stopped automatically.");
+          }
         }
       };
 
@@ -105,33 +138,35 @@ export function useWebcamRecorder(): UseWebcamRecorderReturn {
       };
 
       recorder.onerror = (event) => {
-        setError(`Recording error: ${event}`);
+        setError(`Recording error: ${String(event)}`);
       };
 
       // Start recording
       recorder.start(1000); // collect data every second
       setIsRecording(true);
       setRecordedBlob(null);
+      
       // Start timer
+      let currentTime = 0;
+      setRecordingTime(0);
+      
       timerRef.current = setInterval(() => {
-        setRecordingTime((prev) => prev + 1);
+        currentTime += 1;
+        setRecordingTime(currentTime);
+        
+        // Check time limit
+        if (currentTime >= limitsRef.current.maxTime) {
+          stopRecording();
+          setError("Maximum recording time limit reached (30 mins). Recording stopped automatically.");
+        }
       }, 1000);
+      
     } catch (err) {
       const errMsg = `Failed to start recording: ${err instanceof Error ? err.message : String(err)}`;
       setError(errMsg);
       setIsRecording(false);
     }
-  }, [startCamera]);
-
-  const stopRecording = useCallback(() => {
-    if (mediaRecorderRef.current && isRecording) {
-      mediaRecorderRef.current.stop();
-    }
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-      timerRef.current = null;
-    }
-  }, [isRecording]);
+  }, [startCamera, stopRecording]);
 
   const resetRecording = useCallback(() => {
     if (isRecording) {
@@ -141,6 +176,7 @@ export function useWebcamRecorder(): UseWebcamRecorderReturn {
     setRecordingTime(0);
     setError(null);
     chunksRef.current = [];
+    currentSizeRef.current = 0;
     // Keep camera active
   }, [isRecording, stopRecording]);
 

@@ -8,12 +8,16 @@ interface VideoDropzoneProps {
   onFileSelected: (file: File) => void;
   disabled?: boolean;
   className?: string;
+  text?: string;
+  multiple?: boolean;
 }
 
 export function VideoDropzone({
   onFileSelected,
   disabled = false,
   className,
+  text,
+  multiple = false,
 }: VideoDropzoneProps) {
   const accept: Accept = {
     "video/*": [],
@@ -24,10 +28,23 @@ export function VideoDropzone({
     disabled,
     onDrop: (acceptedFiles) => {
       if (acceptedFiles.length > 0) {
-        onFileSelected(acceptedFiles[0]);
+        if (multiple) {
+          // If multiple, we might need to change the callback signature or call it multiple times
+          // For now, let's just call it for each file if the parent expects that,
+          // or we might need to update the prop signature.
+          // But looking at usage, we are calling addToQueue([file]) in the parent.
+          // Ideally we should pass all files at once.
+          // Let's iterate for now to keep the prop signature compatible if possible,
+          // OR better, let the parent handle the array.
+          // The current prop is `(file: File) => void`.
+          // Let's call it for each file.
+          acceptedFiles.forEach(file => onFileSelected(file));
+        } else {
+          onFileSelected(acceptedFiles[0]);
+        }
       }
     },
-    multiple: false,
+    multiple: multiple,
   });
 
   return (
@@ -64,7 +81,7 @@ export function VideoDropzone({
           <p className="text-lg font-medium">
             {isDragActive
               ? "Drop the video here..."
-              : "Drag & drop a video file"}
+              : text || "Drag & drop a video file"}
           </p>
           <p className="text-sm text-gray-500 mt-2">
             or click to browse (MP4, MOV, AVI, etc.)

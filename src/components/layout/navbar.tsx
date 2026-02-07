@@ -28,7 +28,9 @@ const navigation = [
   { name: "Thumbnail Generator", href: "/thumbnail-generator" },
   { name: "Video Splitter", href: "/video-splitter" },
   { name: "Add Watermark", href: "/add-watermark" },
+  { name: "Adjust Video", href: "/adjust-video" },
   { name: "Blog", href: "/blog" },
+  { name: "Privacy Policy", href: "/privacy" },
   { name: "Privacy Policy", href: "/privacy" },
   { name: "Terms of Service", href: "/terms" },
 ];

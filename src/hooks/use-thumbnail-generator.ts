@@ -1,12 +1,15 @@
 "use client";
 
 import { useState, useCallback, useRef } from "react";
+import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { useWorkspace } from "@/context/workspace-context";
+import { validateFileForProcessing } from "@/lib/file-validation";
+import { getFriendlyErrorMessage } from "@/lib/error-utils";
 
 type ThumbnailFormat = "jpg" | "png";
 
 export function useThumbnailGenerator() {
-  const ffmpegRef = useRef<any>(null);
+  const ffmpegRef = useRef<FFmpeg | null>(null);
   const loadPromiseRef = useRef<Promise<void> | null>(null);
   const [loaded, setLoaded] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -26,15 +29,11 @@ export function useThumbnailGenerator() {
     setError(null);
     const loadPromise = (async () => {
       try {
-        const { FFmpeg } = await import("@ffmpeg/ffmpeg");
-        const { toBlobURL } = await import("@ffmpeg/util");
-
         if (!ffmpegRef.current) {
           ffmpegRef.current = new FFmpeg();
         }
         const ffmpeg = ffmpegRef.current;
 
-        const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.10/dist/umd";
         ffmpeg.on("log", ({ message }: { message: string }) => {
           console.log("FFmpeg log:", message);
         });
@@ -43,15 +42,15 @@ export function useThumbnailGenerator() {
         });
 
         await ffmpeg.load({
-          coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, "text/javascript"),
-          wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, "application/wasm"),
+          coreURL: "/ffmpeg/ffmpeg-core.js",
+          wasmURL: "/ffmpeg/ffmpeg-core.wasm",
         });
 
         setLoaded(true);
         setLoading(false);
         loadPromiseRef.current = null;
       } catch (err) {
-        setError(`Failed to load FFmpeg: ${err instanceof Error ? err.message : String(err)}`);
+        setError(getFriendlyErrorMessage(err));
         setLoading(false);
         loadPromiseRef.current = null;
         throw err;
@@ -71,13 +70,25 @@ export function useThumbnailGenerator() {
   }, []);
 
   const generateThumbnail = useCallback(async (file: File, timestamp: number, format: ThumbnailFormat) => {
+    // 1. Validation
+    const validation = validateFileForProcessing(file);
+    if (!validation.valid) {
+      setError(validation.error || "Geçersiz dosya.");
+      return;
+    }
+
     if (!loaded) {
       console.log("Auto-loading FFmpeg before thumbnail generation...");
-      await loadFFmpeg();
+      try {
+        await loadFFmpeg();
+      } catch (err) {
+        return;
+      }
     }
     const ffmpeg = ffmpegRef.current;
     if (!ffmpeg) {
-      throw new Error("FFmpeg instance not available.");
+      setError(getFriendlyErrorMessage(new Error("FFmpeg instance not available.")));
+      return;
     }
     setIsProcessing(true);
     setError(null);
@@ -129,9 +140,8 @@ export function useThumbnailGenerator() {
       }
       return url;
     } catch (err) {
-      const errMsg = `Thumbnail generation failed: ${err instanceof Error ? err.message : String(err)}`;
-      setError(errMsg);
-      throw new Error(errMsg);
+      const friendlyMsg = getFriendlyErrorMessage(err);
+      setError(friendlyMsg);
     } finally {
       setIsProcessing(false);
     }

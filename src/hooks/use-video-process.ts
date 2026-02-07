@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useCallback, useRef } from "react";
+import { validateFileForProcessing } from "@/lib/file-validation";
+import { getFriendlyErrorMessage } from "@/lib/error-utils";
 
 export function useVideoProcessor() {
   const ffmpegRef = useRef<any>(null);
@@ -51,7 +53,7 @@ export function useVideoProcessor() {
         setLoading(false);
         loadPromiseRef.current = null;
       } catch (err) {
-        setError(`Failed to load FFmpeg: ${err instanceof Error ? err.message : String(err)}`);
+        setError(getFriendlyErrorMessage(err));
         setLoading(false);
         loadPromiseRef.current = null;
         throw err;
@@ -63,14 +65,27 @@ export function useVideoProcessor() {
   }, [loaded]);
 
   const compressVideo = useCallback(async (file: File) => {
+    // 1. Validation
+    const validation = validateFileForProcessing(file);
+    if (!validation.valid) {
+      setError(validation.error || "Geçersiz dosya.");
+      return;
+    }
+
     // Ensure FFmpeg is loaded; if not, load it automatically
     if (!loaded) {
       console.log("Auto-loading FFmpeg before compression...");
-      await loadFFmpeg();
+      try {
+        await loadFFmpeg();
+      } catch (err) {
+        // loadFFmpeg already sets error state but we re-throw to stop execution
+        return;
+      }
     }
     const ffmpeg = ffmpegRef.current;
     if (!ffmpeg) {
-      throw new Error("FFmpeg instance not available.");
+      setError(getFriendlyErrorMessage(new Error("FFmpeg instance not available.")));
+      return;
     }
     setIsProcessing(true);
     setError(null);
@@ -100,9 +115,9 @@ export function useVideoProcessor() {
       setProgress(100);
       return url;
     } catch (err) {
-      const errMsg = `Compression failed: ${err instanceof Error ? err.message : String(err)}`;
-      setError(errMsg);
-      throw new Error(errMsg);
+      const friendlyMsg = getFriendlyErrorMessage(err);
+      setError(friendlyMsg);
+      // We don't re-throw here to avoid unhandled promise rejection in UI, relies on error state
     } finally {
       setIsProcessing(false);
     }

@@ -1,9 +1,12 @@
 "use client";
 
 import { useState, useCallback, useRef } from "react";
+import { FFmpeg } from "@ffmpeg/ffmpeg";
+import { validateFileForProcessing } from "@/lib/file-validation";
+import { getFriendlyErrorMessage } from "@/lib/error-utils";
 
 export function useSlideshow() {
-  const ffmpegRef = useRef<any>(null);
+  const ffmpegRef = useRef<FFmpeg | null>(null);
   const loadPromiseRef = useRef<Promise<void> | null>(null);
   const [loaded, setLoaded] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -24,16 +27,11 @@ export function useSlideshow() {
     setError(null);
     const loadPromise = (async () => {
       try {
-        // Dynamically import FFmpeg and util only on client side
-        const { FFmpeg } = await import("@ffmpeg/ffmpeg");
-        const { toBlobURL } = await import("@ffmpeg/util");
-
         if (!ffmpegRef.current) {
           ffmpegRef.current = new FFmpeg();
         }
         const ffmpeg = ffmpegRef.current;
 
-        const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.10/dist/umd";
         ffmpeg.on("log", ({ message }: { message: string }) => {
           console.log("FFmpeg log:", message);
         });
@@ -43,15 +41,15 @@ export function useSlideshow() {
         });
 
         await ffmpeg.load({
-          coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, "text/javascript"),
-          wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, "application/wasm"),
+          coreURL: "/ffmpeg/ffmpeg-core.js",
+          wasmURL: "/ffmpeg/ffmpeg-core.wasm",
         });
 
         setLoaded(true);
         setLoading(false);
         loadPromiseRef.current = null;
       } catch (err) {
-        setError(`Failed to load FFmpeg: ${err instanceof Error ? err.message : String(err)}`);
+        setError(getFriendlyErrorMessage(err));
         setLoading(false);
         loadPromiseRef.current = null;
         throw err;
@@ -63,14 +61,28 @@ export function useSlideshow() {
   }, [loaded]);
 
   const createSlideshow = useCallback(async (files: File[], durationPerSlide: number) => {
+    // 1. Validation
+    for (const file of files) {
+      const validation = validateFileForProcessing(file);
+      if (!validation.valid) {
+        setError(validation.error || "Geçersiz dosya: " + file.name);
+        return;
+      }
+    }
+
     // Ensure FFmpeg is loaded; if not, load it automatically
     if (!loaded) {
       console.log("Auto-loading FFmpeg before slideshow creation...");
-      await loadFFmpeg();
+      try {
+        await loadFFmpeg();
+      } catch (err) {
+        return;
+      }
     }
     const ffmpeg = ffmpegRef.current;
     if (!ffmpeg) {
-      throw new Error("FFmpeg instance not available.");
+      setError(getFriendlyErrorMessage(new Error("FFmpeg instance not available.")));
+      return;
     }
     setIsProcessing(true);
     setError(null);
@@ -86,7 +98,7 @@ export function useSlideshow() {
         const inputData = new Uint8Array(await file.arrayBuffer());
         // Use extension from original file? FFmpeg may detect format based on extension.
         // We'll rename to image{i+1}.jpg (or .png). For simplicity, use .jpg (FFmpeg will convert).
-        // But we need to keep original extension? Let's use 'image{i+1}.jpg' and rely on FFmpeg's image2 demuxer.
+        // But we need to keep original extension? Let's use 'image{i+1}.xxx' where xxx is file extension.
         // It's safer to preserve original extension. We'll use 'image{i+1}.xxx' where xxx is file extension.
         const ext = file.name.split('.').pop() || 'jpg';
         const name = `image${i + 1}.${ext}`;
@@ -131,9 +143,8 @@ export function useSlideshow() {
       setProgress(100);
       return url;
     } catch (err) {
-      const errMsg = `Slideshow creation failed: ${err instanceof Error ? err.message : String(err)}`;
-      setError(errMsg);
-      throw new Error(errMsg);
+      const friendlyMsg = getFriendlyErrorMessage(err);
+      setError(friendlyMsg);
     } finally {
       setIsProcessing(false);
     }

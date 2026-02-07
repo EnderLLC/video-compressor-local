@@ -81,9 +81,9 @@ export default function WebcamRecorderPage() {
                   </p>
                 </div>
                 <div className="p-4 bg-amber-50 dark:bg-amber-900/20 rounded-lg">
-                  <h3 className="font-semibold text-amber-800 dark:text-amber-300">Unlimited Recording</h3>
+                  <h3 className="font-semibold text-amber-800 dark:text-amber-300">Extended Recording</h3>
                   <p className="text-sm text-amber-700 dark:text-amber-400 mt-1">
-                    Record as long as you need – there's no time limit, file‑size cap, or watermark added to your videos.
+                    Record up to 30 minutes per session. Recordings are saved locally to your device with no watermarks.
                   </p>
                 </div>
                 <div className="p-4 bg-red-50 dark:bg-red-900/20 rounded-lg">

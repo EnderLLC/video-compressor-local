@@ -6,7 +6,13 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useVideoConverter } from "@/hooks/use-video-converter";
+import { useBatchVideoConverter } from "@/hooks/use-batch-video-converter";
+import { VideoQueueList } from "./video-queue-list";
 import AdPlaceholder from "@/components/ui/ad-placeholder";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { useSettings } from "@/hooks/use-settings";
+import { useEffect } from "react";
 
 const FORMATS = [
   { value: "mp4", label: "MP4 (H.264 + AAC)", mime: "video/mp4" },
@@ -19,6 +25,7 @@ const FORMATS = [
   { value: "ogv", label: "OGV (Ogg Video)", mime: "video/ogg" },
   { value: "3gp", label: "3GP (Mobile)", mime: "video/3gpp" },
   { value: "mp3", label: "MP3 (Audio Only)", mime: "audio/mpeg" },
+  // ... other formats if needed
   { value: "wav", label: "WAV (Uncompressed)", mime: "audio/wav" },
   { value: "ogg", label: "OGG (Vorbis)", mime: "audio/ogg" },
   { value: "m4a", label: "M4A (AAC Audio)", mime: "audio/mp4" },
@@ -37,8 +44,21 @@ export default function VideoConverter({
   defaultInputFormat,
   defaultOutputFormat,
 }: VideoConverterProps) {
+  const [isBatchMode, setIsBatchMode] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+
+  // Settings sync
+  const { settings, loaded: settingsLoaded } = useSettings();
   const [selectedFormat, setSelectedFormat] = useState<Format>(defaultOutputFormat || "mp4");
+
+  // Update effect when settings load
+  useEffect(() => {
+    if (settingsLoaded && !defaultOutputFormat) {
+      setSelectedFormat(settings.defaultFormat as Format);
+    }
+  }, [settingsLoaded, settings.defaultFormat, defaultOutputFormat]);
+
+  // Single file hooks
   const {
     loadFFmpeg,
     convertVideo,
@@ -51,9 +71,24 @@ export default function VideoConverter({
     reset,
   } = useVideoConverter();
 
+  // Batch file hooks
+  const {
+    queue,
+    addToQueue,
+    removeFromQueue,
+    clearQueue,
+    processQueue,
+    isProcessingBatch,
+    loaded: batchLoaded
+  } = useBatchVideoConverter();
+
   const handleFileSelected = (file: File) => {
-    setSelectedFile(file);
-    reset(); // Clear previous results
+    if (isBatchMode) {
+      addToQueue([file], selectedFormat);
+    } else {
+      setSelectedFile(file);
+      reset();
+    }
   };
 
   const handleConvert = async () => {
@@ -64,7 +99,6 @@ export default function VideoConverter({
     try {
       await convertVideo(selectedFile, selectedFormat);
     } catch (err) {
-      // error already set in hook
       console.error(err);
     }
   };
@@ -82,7 +116,12 @@ export default function VideoConverter({
 
   return (
     <div className="w-full max-w-lg">
-      {!selectedFile ? (
+      <div className="flex items-center space-x-2 mb-4">
+        <Switch id="batch-mode" checked={isBatchMode} onCheckedChange={setIsBatchMode} />
+        <Label htmlFor="batch-mode">Batch Mode</Label>
+      </div>
+
+      {!selectedFile && !isBatchMode ? (
         <>
           <VideoDropzone
             onFileSelected={handleFileSelected}
@@ -90,7 +129,50 @@ export default function VideoConverter({
           />
           <AdPlaceholder className="mt-6" />
         </>
+      ) : isBatchMode ? (
+        // Batch Mode UI
+        <Card className="w-full">
+          <CardHeader>
+            <CardTitle>Batch Converter</CardTitle>
+            <CardDescription>Convert multiple videos sequentially.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <VideoDropzone
+              onFileSelected={(file) => addToQueue([file], selectedFormat)}
+              disabled={isProcessingBatch}
+              className="h-32"
+              text="Add more files"
+            />
+
+            <div className="mt-4 space-y-2">
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                Target Format (Applied to new items)
+              </label>
+              <select
+                className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100"
+                value={selectedFormat}
+                onChange={(e) => setSelectedFormat(e.target.value as Format)}
+                disabled={isProcessingBatch}
+              >
+                {FORMATS.map((format) => (
+                  <option key={format.value} value={format.value}>
+                    {format.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <VideoQueueList
+              queue={queue}
+              onRemove={removeFromQueue}
+              onClear={clearQueue}
+              onProcess={processQueue}
+              isProcessing={isProcessingBatch}
+            />
+          </CardContent>
+        </Card>
       ) : (
+        // Single File UI
         <Card className="w-full">
           <CardHeader>
             <CardTitle>Video Converter</CardTitle>
@@ -125,8 +207,8 @@ export default function VideoConverter({
               </select>
               <p className="text-xs text-gray-500 dark:text-gray-400">
                 {selectedFormat === "mp3" ? "Audio will be extracted, video track removed." :
-                 selectedFormat === "gif" ? "Video will be converted to animated GIF (low resolution)." :
-                 "Video and audio will be re‑encoded for the chosen container."}
+                  selectedFormat === "gif" ? "Video will be converted to animated GIF (low resolution)." :
+                    "Video and audio will be re‑encoded for the chosen container."}
               </p>
             </div>
 
@@ -180,6 +262,9 @@ export default function VideoConverter({
                 <AdPlaceholder className="mt-4" />
               </div>
             )}
+            <Button variant="ghost" size="sm" onClick={() => setSelectedFile(null)} className="w-full mt-2">
+              Cancel
+            </Button>
           </CardContent>
         </Card>
       )}

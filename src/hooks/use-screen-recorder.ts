@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useRef, useCallback, useEffect } from "react";
+import { FFmpeg } from "@ffmpeg/ffmpeg";
+import { getFriendlyErrorMessage } from "@/lib/error-utils";
 
 interface UseScreenRecorderReturn {
   isRecording: boolean;
@@ -23,6 +25,15 @@ export function useScreenRecorder(): UseScreenRecorderReturn {
   const chunksRef = useRef<Blob[]>([]);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
+  // FFmpeg related states and refs
+  const ffmpegRef = useRef<FFmpeg | null>(null);
+  const loadPromiseRef = useRef<Promise<void> | null>(null);
+  const [loaded, setLoaded] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [progress, setProgress] = useState(0); // This progress is for FFmpeg processing, not recording time
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [outputUrl, setOutputUrl] = useState<string | null>(null);
+
   // Clean up on unmount
   useEffect(() => {
     return () => {
@@ -32,6 +43,48 @@ export function useScreenRecorder(): UseScreenRecorderReturn {
       }
     };
   }, []);
+
+  const loadFFmpeg = useCallback(async () => {
+    // If already loaded, nothing to do
+    if (loaded) return;
+    // If a load is already in progress, return its promise
+    if (loadPromiseRef.current) {
+      return loadPromiseRef.current;
+    }
+
+    setLoading(true);
+    setError(null);
+    const loadPromise = (async () => {
+      try {
+        if (!ffmpegRef.current) {
+          ffmpegRef.current = new FFmpeg();
+        }
+
+        const ffmpeg = ffmpegRef.current;
+        ffmpeg.on("log", ({ message }) => {
+          console.log("[FFmpeg log]", message);
+        });
+        ffmpeg.on("progress", ({ progress }) => {
+          setProgress(progress * 100);
+        });
+
+        await ffmpeg.load({
+          coreURL: "/ffmpeg/ffmpeg-core.js",
+          wasmURL: "/ffmpeg/ffmpeg-core.wasm",
+        });
+
+        setLoaded(true);
+      } catch (err) {
+        setError(getFriendlyErrorMessage(err));
+        console.error("Failed to load FFmpeg:", err);
+      } finally {
+        setLoading(false);
+        loadPromiseRef.current = null;
+      }
+    })();
+    loadPromiseRef.current = loadPromise;
+    return loadPromise;
+  }, [loaded]);
 
   const startRecording = useCallback(async () => {
     try {
@@ -82,8 +135,7 @@ export function useScreenRecorder(): UseScreenRecorderReturn {
         setRecordingTime((prev) => prev + 1);
       }, 1000);
     } catch (err) {
-      const errMsg = `Failed to start recording: ${err instanceof Error ? err.message : String(err)}`;
-      setError(errMsg);
+      setError(getFriendlyErrorMessage(err));
       setIsRecording(false);
     }
   }, []);

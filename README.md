@@ -83,4 +83,5 @@ Güncel tamamlanan task’ler, aktif işler ve ilerleme çetelesi:
 
 ---
 
+
 *Bu dosya projenin ana giriş kapısıdır. Detaylı dokümantasyon için `docs/` klasörünü inceleyin.*

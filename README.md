@@ -81,10 +81,6 @@ Yeni bir video aracı eklemek için adım adım kılavuz:
 Güncel tamamlanan task’ler, aktif işler ve ilerleme çetelesi:  
 [`docs/project-status.md`](docs/project-status.md)
 
-## 🌐 Canlı Demo
-
-Proje Vercel’de yayında: [https://video-compressor-local.vercel.app](https://video-compressor-local.vercel.app)
-
 ---
 
 *Bu dosya projenin ana giriş kapısıdır. Detaylı dokümantasyon için `docs/` klasörünü inceleyin.*
